@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>외국인 계절근로자 전용 상해보험</title>
+    <title>외국인 계절근로자 전용 상해보험 - 인스코리아</title>
     
+    <!-- 디자인(부트스트랩) 및 폰트 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- 다국어 폰트 깨짐 방지를 위한 폰트 설정 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+TC&family=Noto+Sans+SC&family=Noto+Sans+Thai&family=Noto+Sans+Lao&family=Noto+Sans+Khmer&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
 
     <style>
+        /* 모든 언어가 깨지지 않도록 글로벌 폰트 적용 */
         body {
-            font-family: 'Pretendard', sans-serif;
+            font-family: 'Pretendard', 'Noto Sans KR', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans Thai', 'Noto Sans Lao', 'Noto Sans Khmer', 'Noto Sans Bengali', sans-serif;
             background-color: #f9fbfc;
             color: #333;
         }
@@ -22,25 +26,22 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
         }
 
-        /* 스크롤바 디자인 (언어 목록이 길어서 추가) */
         .dropdown-menu {
-            max-height: 400px; /* 목록이 너무 길어지면 스크롤 생김 */
+            max-height: 400px; 
             overflow-y: auto;
         }
-
-        /* 스크롤바 예쁘게 꾸미기 */
         .dropdown-menu::-webkit-scrollbar { width: 8px; }
         .dropdown-menu::-webkit-scrollbar-thumb { background-color: #ddd; border-radius: 4px; }
         .dropdown-menu::-webkit-scrollbar-track { background-color: transparent; }
 
         .hero-section {
-            background: linear-gradient(120deg, #e0f2ff 0%, #f0f7ff 100%);
+            background-color: #f5f4f1;
             padding: 100px 0 80px;
             border-bottom-left-radius: 50px;
             border-bottom-right-radius: 50px;
         }
 
-        .highlight-text { color: #0064FF; font-weight: 800; }
+        .highlight-text { color: #FF9F43; font-weight: 800; }
 
         .custom-card {
             background: white;
@@ -52,27 +53,23 @@
             cursor: pointer;
             height: 100%;
         }
-
-        .custom-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,100,255,0.15);
-        }
+        .custom-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(255, 159, 67, 0.15); }
 
         .card-icon-box {
             width: 70px;
             height: 70px;
-            background-color: #F2F7FF;
+            background-color: #FFF4E6;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
             font-size: 30px;
-            color: #0064FF;
+            color: #FF9F43;
         }
 
         .btn-custom {
-            background-color: #0064FF;
+            background-color: #FF9F43;
             color: white;
             padding: 12px 30px;
             border-radius: 50px;
@@ -80,7 +77,11 @@
             border: none;
             transition: 0.3s;
         }
-        .btn-custom:hover { background-color: #0050cc; transform: scale(1.05); }
+        .btn-custom:hover { background-color: #e68a00; transform: scale(1.05); }
+
+        .btn-outline-primary { color: #FF9F43 !important; border-color: #FF9F43 !important; }
+        .btn-outline-primary:hover { background-color: #FF9F43 !important; border-color: #FF9F43 !important; color: white !important; }
+        .badge { border-color: #FF9F43 !important; color: #FF9F43 !important; }
     </style>
 </head>
 <body>
@@ -88,39 +89,38 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#">
-                <span class="text-primary"><i class="bi bi-shield-check-fill"></i> Seasonal</span>Care
+                <span style="color: #157EA5;"><i class="bi bi-shield-check-fill"></i> INSKOREA</span>
             </a>
             
             <div class="ms-auto">
                 <div class="dropdown">
                     <button class="btn btn-light rounded-pill px-3 fw-bold border" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-globe2 me-1"></i> Language
+                        <i class="bi bi-globe2 me-1"></i> <span id="current-lang">한국어</span>
                     </button>
-                    <!-- 언어 목록 시작 (보내주신 이미지 순서대로) -->
+                    <!-- 모든 언어 리스트 연결 -->
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
-                        <li><a class="dropdown-item py-2" href="#">English(영어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Tiếng Việt(베트남)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Filipino(필리핀)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">ພາສາລາວ(라오스)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">ភាសាខ្មែរ(캄보디아)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Монгол(몽골)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Русский(러시아어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">o'zbek(우즈베크어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Indonesia(인도네시아어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">简体中文(중국-간체)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">繁體中文(중국-번체)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">Кыргызча(키르기스어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">แบบไทย(태국어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">မြန်မာ(미얀마어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">বাংলা(벵골어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">සිංහල(신할라어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">தமிழ்(타밀어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">اردو(우르두어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#">فارسی(페르시아어)</a></li>
+                        <li><a class="dropdown-item py-2 fw-bold" href="#" onclick="changeLang('ko')">🇰🇷 한국어</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2 fw-bold" href="#">한국어</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('en')">English (영어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('vn')">Tiếng Việt (베트남)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ph')">Filipino (필리핀)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('lo')">ພາສາລາວ (라오스)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('km')">ភាសាខ្មែរ (캄보디아)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mn')">Монгол (몽골)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ru')">Русский (러시아어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('uz')">O'zbek (우즈베크어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('id')">Indonesia (인도네시아어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('cn')">简体中文 (중국-간체)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('tw')">繁體中文 (중국-번체)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('kg')">Кыргызча (키르기스어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('th')">แบบไทย (태국어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mm')">မြန်မာ (미얀마어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('bn')">বাংলা (벵골어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('si')">සිංහල (신할라어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ta')">தமிழ் (타밀어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ur')">اردو (우르두어)</a></li>
+                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('fa')">فارسی (페르시아어)</a></li>
                     </ul>
-                    <!-- 언어 목록 끝 -->
                 </div>
             </div>
         </div>
@@ -130,20 +130,20 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 order-2 order-md-1 mt-5 mt-md-0">
-                    <span class="badge bg-white text-primary border border-primary-subtle rounded-pill px-3 py-2 mb-3 shadow-sm">
-                        ✨ 삼성화재 제휴 서비스
+                    <span id="badge-text" class="badge bg-white rounded-pill px-3 py-2 mb-3 shadow-sm border">
+                          ✨ 현대해상 제휴 서비스
                     </span>
                     <h1 class="fw-bold display-4 mb-4" style="line-height: 1.3;">
-                        외국인 계절근로자<br>
-                        <span class="highlight-text">전용 상해보험</span>
+                        <span id="title-main">외국인 계절근로자</span><br>
+                        <span id="title-sub" class="highlight-text">전용 상해보험</span>
                     </h1>
-                    <p class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
+                    <p id="hero-desc" class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
                         복잡한 서류 없이 여권 촬영 한 번으로!<br>
                         지자체와 근로자 모두를 위한 가장 안전한 선택입니다.
                     </p>
                     <div class="d-flex gap-2 justify-content-center justify-content-md-start">
-                        <button class="btn btn-custom shadow">상담 신청하기</button>
-                        <button class="btn btn-outline-primary rounded-pill px-4 fw-bold border-2">자세히 보기</button>
+                        <button id="btn-consult" class="btn btn-custom shadow">상담 신청하기</button>
+                        <button id="btn-detail" class="btn btn-outline-primary rounded-pill px-4 fw-bold">자세히 보기</button>
                     </div>
                 </div>
                 <div class="col-md-6 order-1 order-md-2 text-center">
@@ -158,44 +158,305 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <div class="custom-card">
-                        <div class="card-icon-box">
-                            <i class="bi bi-building"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">지방자치단체 가입</h4>
-                        <p class="text-secondary mb-4">지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.</p>
-                        <a href="#" class="text-decoration-none fw-bold text-primary">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="card-icon-box"><i class="bi bi-building"></i></div>
+                        <h4 id="card1-title" class="fw-bold mb-3">지방자치단체 가입</h4>
+                        <p id="card1-desc" class="text-secondary mb-4">지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.</p>
+                        <a id="link-go" href="#" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
-
                 <div class="col-lg-4 col-md-6">
                     <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;">
-                            <i class="bi bi-people-fill"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">공공형 가입</h4>
-                        <p class="text-secondary mb-4">공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.</p>
-                        <a href="#" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
+                        <h4 id="card2-title" class="fw-bold mb-3">공공형 가입</h4>
+                        <p id="card2-desc" class="text-secondary mb-4">공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.</p>
+                        <a id="link-go2" href="#" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
-
                 <div class="col-lg-4 col-md-6">
                     <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">가입 조회</h4>
-                        <p class="text-secondary mb-4">보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.</p>
-                        <a href="#" class="text-decoration-none fw-bold" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
+                        <h4 id="card3-title" class="fw-bold mb-3">가입 조회</h4>
+                        <p id="card3-desc" class="text-secondary mb-4">보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.</p>
+                        <a id="link-go3" href="#" class="text-decoration-none fw-bold" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-5 text-secondary">
-        <small>Copyright © 2025 Seasonal Care. All rights reserved.</small>
+    <footer class="bg-white border-top py-5 mt-5" style="border-top: 1px solid #eee;">
+        <div class="container">
+            <div class="mb-4 d-flex flex-wrap gap-3 gap-md-4">
+                <a href="#" id="ft-menu-1" class="text-dark text-decoration-none fw-bold small">금융소비자보호법에 따른 고지</a>
+                <a href="#" id="ft-menu-2" class="text-dark text-decoration-none fw-bold small">개인정보처리방침</a>
+                <a href="#" id="ft-menu-3" class="text-secondary text-decoration-none small">이용약관</a>
+                <a href="#" id="ft-menu-4" class="text-secondary text-decoration-none small">단체규약</a>
+                <a href="#" id="ft-menu-5" class="text-secondary text-decoration-none small">FAQ</a>
+            </div>
+            <hr class="mb-4" style="opacity: 0.1;">
+            <div>
+                <h5 id="ft-company-name" class="fw-bold mb-3 text-dark">인스코리아</h5>
+                <div class="text-secondary small" style="line-height: 1.7; font-size: 13px;">
+                    <p class="mb-1" id="ft-line-1"><span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리</p>
+                    <p class="mb-1" id="ft-line-2">사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제123456789호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호</p>
+                    <p class="mb-1" id="ft-line-3"><span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)</p>
+                    <p class="mb-0" id="ft-addr"><span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호</p>
+                </div>
+            </div>
+            <div class="mt-4 text-secondary small opacity-50">Copyright © INSKOREA Co., Ltd. All rights reserved.</div>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- ★ 20개국 언어 번역 엔진 ★ -->
+    <script>
+        const translations = {
+            'ko': {
+                langName: '한국어', badge: '✨ 현대해상 제휴 서비스',
+                titleMain: '외국인 계절근로자', titleSub: '전용 상해보험',
+                desc: '복잡한 서류 없이 여권 촬영 한 번으로!<br>지자체와 근로자 모두를 위한 가장 안전한 선택입니다.',
+                btnConsult: '상담 신청하기', btnDetail: '자세히 보기',
+                card1Title: '지방자치단체 가입', card1Desc: '지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.', linkGo: '바로가기',
+                card2Title: '공공형 가입', card2Desc: '공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.', linkGo2: '바로가기',
+                card3Title: '가입 조회', card3Desc: '보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.', linkGo3: '조회하기',
+                ftMenu1: '금융소비자보호법에 따른 고지', ftMenu2: '개인정보처리방침', ftMenu3: '이용약관', ftMenu4: '단체규약', ftMenu5: 'FAQ',
+                ftCompanyName: '인스코리아', ftLine1: '<span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리',
+                ftLine2: '사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제123456789호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호',
+                ftLine3: '<span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)',
+                ftAddr: '<span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호'
+            },
+            'en': {
+                langName: 'English', badge: '✨ Hyundai Marine Partnership',
+                titleMain: 'Accident insurance for', titleSub: 'foreign seasonal workers',
+                desc: 'Even if you don\'t have an alien registration number<br>No identity verification required with just one passport photo<br>Super easy insurance subscription!',
+                btnConsult: 'Consultation', btnDetail: 'View Details',
+                card1Title: 'Joining local governments', card1Desc: '+ Group insurance subscription<br>+ Group history management', linkGo: 'Go to Page',
+                card2Title: 'Public subscription', card2Desc: '+ Group insurance subscription<br>+ Group history management', linkGo2: 'Go to Page',
+                card3Title: 'Subscription Inquiry', card3Desc: '+ Check subscription details<br>+ Issuance of membership certificate', linkGo3: 'Check Now',
+                ftMenu1: 'Financial Consumer Protection Notice', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms of Use', ftMenu4: 'Group Regulations', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Company :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'Business Reg. No : 780-22-02367 <span class="mx-2">|</span> Ins. Assoc. Reg. No : 123456789 <span class="d-none d-md-inline mx-2">|</span> Mail Order Report : 2025 Seoul Mapo 0000',
+                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span> (Weekdays 9:00~17:30 / Closed on Weekends)',
+                ftAddr: '<span class="fw-bold">Address :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+            },
+            'vn': {
+                langName: 'Tiếng Việt', badge: '✨ Đối tác bảo hiểm Hyundai',
+                titleMain: 'Người lao động thời vụ', titleSub: 'Bảo hiểm tai nạn',
+                desc: 'Ngay cả khi bạn không có số đăng ký người nước ngoài.<br>Không cần xác minh danh tính, chỉ cần một ảnh hộ chiếu.<br>Đăng ký bảo hiểm cực kỳ dễ dàng!',
+                btnConsult: 'Tư vấn', btnDetail: 'Xem chi tiết',
+                card1Title: 'Tham gia chính quyền địa phương', card1Desc: '+ Đăng ký bảo hiểm nhóm<br>+ Quản lý lịch sử nhóm', linkGo: 'Đi đến trang',
+                card2Title: 'Đăng ký công khai', card2Desc: '+ Đăng ký bảo hiểm nhóm<br>+ Quản lý lịch sử nhóm', linkGo2: 'Đi đến trang',
+                card3Title: 'Tra cứu đăng ký', card3Desc: '+ Kiểm tra chi tiết đăng ký<br>+ Cấp giấy chứng nhận thành viên', linkGo3: 'Kiểm tra ngay',
+                ftMenu1: 'Thông báo Luật Bảo vệ Người tiêu dùng', ftMenu2: 'Chính sách bảo mật', ftMenu3: 'Điều khoản', ftMenu4: 'Quy định nhóm', ftMenu5: 'FAQ',
+                ftCompanyName: 'Công ty TNHH INSKOREA', ftLine1: '<span class="fw-bold">Tên công ty :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Đại diện :</span> Seo Yuri',
+                ftLine2: 'ĐKKD : 780-22-02367 <span class="mx-2">|</span> Hiệp hội Bảo hiểm : 123456789 <br> Báo cáo bán hàng : 2025 Seoul Mapo 0000',
+                ftLine3: '<span class="fw-bold">CSKH : 010 7546 5568</span> (9:00~17:30 các ngày trong tuần)',
+                ftAddr: '<span class="fw-bold">Địa chỉ :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+            },
+            'ph': {
+                langName: 'Filipino', badge: '✨ Partner ng Hyundai Marine',
+                titleMain: 'Seguro sa aksidente para sa', titleSub: 'mga pana-panahong manggagawa',
+                desc: 'Kahit na wala kang numero ng rehistrasyon bilang dayuhan<br>Hindi kailangan ng beripikasyon, litrato ng pasaporte lang<br>Napakadaling mag-subscribe sa insurance!',
+                btnConsult: 'Konsultasyon', btnDetail: 'Tingnan',
+                card1Title: 'Pagsali sa mga lokal na pamahalaan', card1Desc: '+ Subskripsyon sa seguro ng grupo<br>+ Pamamahala ng kasaysayan', linkGo: 'Pumunta',
+                card2Title: 'Pampublikong suskrisyon', card2Desc: '+ Subskripsyon sa seguro ng grupo<br>+ Pamamahala ng kasaysayan', linkGo2: 'Pumunta',
+                card3Title: 'Katanungan tungkol sa Suskrisyon', card3Desc: '+ Suriin ang mga detalye<br>+ Sertipiko ng pagiging miyembro', linkGo3: 'Suriin',
+                ftMenu1: 'Paunawa sa Proteksyon ng Mamimili', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'Regulasyon', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA Co., Ltd.', ftLine1: '<span class="fw-bold">Kompanya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Kinatawan :</span> Seo Yuri',
+                ftLine2: 'Negosyo Blg : 780-22-02367 <span class="mx-2">|</span> Asosasyon ng Seguro : 123456789 <br> Mail Order : 2025 Seoul Mapo 0000',
+                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span> (Weekdays 9:00~17:30)',
+                ftAddr: '<span class="fw-bold">Address :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+            },
+            'lo': {
+                langName: 'ພາສາລາວ', badge: '✨ ຄູ່ຮ່ວມງານ Hyundai Marine',
+                titleMain: 'ປະກັນໄພອຸປະຕິເຫດ', titleSub: 'ສຳລັບແຮງງານຕາມລະດູການ',
+                desc: 'ເຖິງແມ່ນວ່າທ່ານບໍ່ມີເລກບັດປະຈຳຕົວຄົນຕ່າງດ້າວ<br>ພຽງແຕ່ໃຊ້ຮູບຖ່າຍຫນັງສືຜ່ານແດນ, ສະໝັກໄດ້ງ່າຍດາຍ!',
+                btnConsult: 'ປຶກສາຫາລື', btnDetail: 'ເບິ່ງລາຍລະອຽດ',
+                card1Title: 'ການເຂົ້າຮ່ວມຂອງລັດຖະບານທ້ອງຖິ່ນ', card1Desc: '+ ສະຫມັກປະກັນໄພກຸ່ມ<br>+ ການຄຸ້ມຄອງປະຫວັດກຸ່ມ', linkGo: 'ໄປທີ່ໜ້າ',
+                card2Title: 'ການສະໝັກແບບສາທາລະນະ', card2Desc: '+ ສະຫມັກປະກັນໄພກຸ່ມ<br>+ ການຄຸ້ມຄອງປະຫວັດກຸ່ມ', linkGo2: 'ໄປທີ່ໜ້າ',
+                card3Title: 'ກວດສອບການສະໝັກ', card3Desc: '+ ກວດເບິ່ງລາຍລະອຽດ<br>+ ອອກໃບຢັ້ງຢືນການເປັນສະມາຊິກ', linkGo3: 'ກວດສອບ'
+            },
+            'km': {
+                langName: 'ភាសាខ្មែរ', badge: '✨ ដៃគូ Hyundai Marine',
+                titleMain: 'ធានារ៉ាប់រងគ្រោះថ្នាក់', titleSub: 'សម្រាប់ពលករតាមរដូវកាល',
+                desc: 'ទោះបីជាមិនមានលេខចុះឈ្មោះជនបរទេសក៏ដោយ<br>គ្រាន់តែរូបថតលិខិតឆ្លងដែនមួយសន្លឹកប៉ុណ្ណោះ!',
+                btnConsult: 'ការពិគ្រោះយោបល់', btnDetail: 'មើលព័ត៌មានលម្អិត',
+                card1Title: 'ការចូលរួមរបស់រដ្ឋាភិបាលក្នុងតំបន់', card1Desc: '+ ការធានារ៉ាប់រងជាក្រុម<br>+ ការគ្រប់គ្រងប្រវត្តិក្រុម', linkGo: 'ទៅកាន់ទំព័រ',
+                card2Title: 'ការចុះឈ្មោះជាសាធារណៈ', card2Desc: '+ ការធានារ៉ាប់រងជាក្រុម<br>+ ការគ្រប់គ្រងប្រវត្តិក្រុម', linkGo2: 'ទៅកាន់ទំព័រ',
+                card3Title: 'ការសាកសួរការចុះឈ្មោះ', card3Desc: '+ ពិនិត្យព័ត៌មានលម្អិត<br>+ ការចេញវិញ្ញាបនបត្រ', linkGo3: 'ពិនិត្យឥឡូវនេះ'
+            },
+            'mn': {
+                langName: 'Монгол', badge: '✨ Hyundai Marine түнш',
+                titleMain: 'Гадаад ажилчдад зориулсан', titleSub: 'Гэнэтийн ослын даатгал',
+                desc: 'Гадаад иргэний үнэмлехгүй байсан ч болно<br>Зөвхөн гадаад паспорт байхад л хангалттай!',
+                btnConsult: 'Зөвлөгөө авах', btnDetail: 'Дэлгэрэнгүй',
+                card1Title: 'Орон нутгийн засаг захиргаа', card1Desc: '+ Бүлгийн даатгалд хамрагдах<br>+ Түүхийн удирдлага', linkGo: 'Хуудас руу очих',
+                card2Title: 'Нийтийн бүртгэл', card2Desc: '+ Бүлгийн даатгалд хамрагдах<br>+ Түүхийн удирдлага', linkGo2: 'Хуудас руу очих',
+                card3Title: 'Бүртгэл шалгах', card3Desc: '+ Бүртгэлийн дэлгэрэнгүйг шалгах<br>+ Гэрчилгээ олгох', linkGo3: 'Шалгах'
+            },
+            'ru': {
+                langName: 'Русский', badge: '✨ Партнер Hyundai Marine',
+                titleMain: 'Страхование от несчастных случаев', titleSub: 'для сезонных работников',
+                desc: 'Даже без регистрационного номера иностранца<br>Достаточно только фотографии паспорта. Супер просто!',
+                btnConsult: 'Консультация', btnDetail: 'Подробнее',
+                card1Title: 'Регистрация через администрацию', card1Desc: '+ Групповое страхование<br>+ Управление историей', linkGo: 'Перейти',
+                card2Title: 'Общая регистрация', card2Desc: '+ Групповое страхование<br>+ Управление историей', linkGo2: 'Перейти',
+                card3Title: 'Проверка статуса', card3Desc: '+ Проверить детали подписки<br>+ Выдача сертификата', linkGo3: 'Проверить'
+            },
+            'uz': {
+                langName: 'O\'zbek', badge: '✨ Hyundai Marine Hamkori',
+                titleMain: 'Mavsumiy ishchilar uchun', titleSub: 'Baxtsiz hodisa sug\'urtasi',
+                desc: 'Chet el fuqarosi ro\'yxatga olish raqamisiz ham<br>Faqat pasport rasmi bilan oson ro\'yxatdan o\'ting!',
+                btnConsult: 'Maslahat', btnDetail: 'Batafsil',
+                card1Title: 'Mahalliy hokimiyat orqali', card1Desc: '+ Guruh sug\'urtasi<br>+ Tarixni boshqarish', linkGo: 'Sahifaga o\'tish',
+                card2Title: 'Ommaviy ro\'yxatdan o\'tish', card2Desc: '+ Guruh sug\'urtasi<br>+ Tarixni boshqarish', linkGo2: 'Sahifaga o\'tish',
+                card3Title: 'Holatni tekshirish', card3Desc: '+ Tafsilotlarni tekshirish<br>+ Sertifikat berish', linkGo3: 'Tekshirish'
+            },
+            'id': {
+                langName: 'Indonesia', badge: '✨ Mitra Hyundai Marine',
+                titleMain: 'Asuransi Kecelakaan', titleSub: 'Pekerja Musiman Asing',
+                desc: 'Bahkan tanpa Nomor Registrasi Orang Asing<br>Cukup dengan satu foto paspor, sangat mudah!',
+                btnConsult: 'Konsultasi', btnDetail: 'Lihat Detail',
+                card1Title: 'Pendaftaran Pemda', card1Desc: '+ Asuransi kelompok<br>+ Manajemen riwayat', linkGo: 'Buka Halaman',
+                card2Title: 'Pendaftaran Umum', card2Desc: '+ Asuransi kelompok<br>+ Manajemen riwayat', linkGo2: 'Buka Halaman',
+                card3Title: 'Cek Status', card3Desc: '+ Cek detail pendaftaran<br>+ Penerbitan sertifikat', linkGo3: 'Cek Sekarang'
+            },
+            'cn': {
+                langName: '简体中文', badge: '✨ 现代海上火灾保险 合作伙伴',
+                titleMain: '外籍季节性劳工', titleSub: '专用意外伤害保险',
+                desc: '即使没有外国人登录证也可以！<br>只需一张护照照片，无需繁琐认证，超简单投保！',
+                btnConsult: '咨询申请', btnDetail: '查看详情',
+                card1Title: '地方政府加入', card1Desc: '+ 团体保险加入<br>+ 团体记录管理', linkGo: '前往页面',
+                card2Title: '公共型加入', card2Desc: '+ 团体保险加入<br>+ 团体记录管理', linkGo2: '前往页面',
+                card3Title: '加入查询', card3Desc: '+ 确认加入详情<br>+ 签发加入证明书', linkGo3: '立即查询'
+            },
+            'tw': {
+                langName: '繁體中文', badge: '✨ 現代海上火災保險 合作夥伴',
+                titleMain: '外籍季節性勞工', titleSub: '專用意外傷害保險',
+                desc: '即使沒有外國人登錄證也可以！<br>只需一張護照照片，無需繁瑣認證，超簡單投保！',
+                btnConsult: '諮詢申請', btnDetail: '查看詳情',
+                card1Title: '地方政府加入', card1Desc: '+ 團體保險加入<br>+ 團體記錄管理', linkGo: '前往頁面',
+                card2Title: '公共型加入', card2Desc: '+ 團體保險加入<br>+ 團體記錄管理', linkGo2: '前往頁面',
+                card3Title: '加入查詢', card3Desc: '+ 確認加入詳情<br>+ 簽發加入證明書', linkGo3: '立即查詢'
+            },
+            'kg': {
+                langName: 'Кыргызча', badge: '✨ Hyundai Marine өнөктөшү',
+                titleMain: 'Чет элдик жумушчулар үчүн', titleSub: 'Кырсыктан камсыздандыруу',
+                desc: 'Чет элдик каттоонун номери жок болсо да<br>Паспорттун сүрөтү менен оңой катталыңыз!',
+                btnConsult: 'Кеңеш алуу', btnDetail: 'Кененирээк',
+                card1Title: 'Жергиликтүү бийлик аркылуу', card1Desc: '+ Топтук камсыздандыруу<br>+ Тарыхты башкаруу', linkGo: 'Өтүү',
+                card2Title: 'Коомдук каттоо', card2Desc: '+ Топтук камсыздандыруу<br>+ Тарыхты башкаруу', linkGo2: 'Өтүү',
+                card3Title: 'Статусту текшерүү', card3Desc: '+ чоо-жайын текшерүү<br>+ Сертификат берүү', linkGo3: 'Текшерүү'
+            },
+            'th': {
+                langName: 'แบบไทย', badge: '✨ พันธมิตร Hyundai Marine',
+                titleMain: 'ประกันอุบัติเหตุสำหรับ', titleSub: 'แรงงานต่างด้าวตามฤดูกาล',
+                desc: 'แม้ไม่มีเลขทะเบียนต่างด้าวก็สมัครได้<br>ใช้แค่รูปถ่ายพาสปอร์ต ไม่ต้องยืนยันตัวตน สมัครง่ายสุดๆ!',
+                btnConsult: 'ขอคำปรึกษา', btnDetail: 'ดูรายละเอียด',
+                card1Title: 'การเข้าร่วมของรัฐบาลท้องถิ่น', card1Desc: '+ สมัครประกันกลุ่ม<br>+ การจัดการประวัติ', linkGo: 'ไปที่หน้า',
+                card2Title: 'การสมัครแบบสาธารณะ', card2Desc: '+ สมัครประกันกลุ่ม<br>+ การจัดการประวัติ', linkGo2: 'ไปที่หน้า',
+                card3Title: 'ตรวจสอบการสมัคร', card3Desc: '+ ตรวจสอบรายละเอียด<br>+ ออกใบรับรอง', linkGo3: 'ตรวจสอบทันที'
+            },
+            'mm': {
+                langName: 'မြန်မာ', badge: '✨ Hyundai Marine မိတ်ဖက်',
+                titleMain: 'နိုင်ငံခြားသား ရာသီချိန်လုပ်သားများ', titleSub: 'မတော်တဆထိခိုက်မှု အာမခံ',
+                desc: 'နိုင်ငံခြားသားမှတ်ပုံတင်နံပါတ်မရှိလည်း ရပါတယ်<br>နိုင်ငံကူးလက်မှတ်ဓာတ်ပုံတစ်ပုံတည်းဖြင့် အလွယ်တကူစာရင်းသွင်းနိုင်ပါတယ်!',
+                btnConsult: 'ဆွေးနွေးတိုင်ပင်ရန်', btnDetail: 'အသေးစိတ်ကြည့်ရန်',
+                card1Title: 'ဒေသန္တရအစိုးရမှတဆင့်', card1Desc: '+ အဖွဲ့လိုက်အာမခံ<br>+ မှတ်တမ်းစီမံခန့်ခွဲမှု', linkGo: 'စာမျက်နှာသို့',
+                card2Title: 'အများပြည်သူဆိုင်ရာ စာရင်းသွင်းခြင်း', card2Desc: '+ အဖွဲ့လိုက်အာမခံ<br>+ မှတ်တမ်းစီမံခန့်ခွဲမှု', linkGo2: 'စာမျက်နှာသို့',
+                card3Title: 'စာရင်းသွင်းမှု စစ်ဆေးရန်', card3Desc: '+ အသေးစိတ်စစ်ဆေးရန်<br>+ လက်မှတ်ထုတ်ပေးခြင်း', linkGo3: 'စစ်ဆေးပါ'
+            },
+            'bn': {
+                langName: 'বাংলা', badge: '✨ হুন্ডাই মেরিন পার্টনার',
+                titleMain: 'বিদেশী মৌসুমী কর্মীদের জন্য', titleSub: 'দুর্ঘটনা বীমা',
+                desc: 'বিদেশী রেজিস্ট্রেশন নম্বর না থাকলেও হবে<br>শুধুমাত্র পাসপোর্ট ছবি দিয়ে খুব সহজেই সাইন আপ করুন!',
+                btnConsult: 'পরামর্শ', btnDetail: 'বিস্তারিত দেখুন',
+                card1Title: 'স্থানীয় সরকার', card1Desc: '+ গ্রুপ বীমা সাবস্ক্রিপশন<br>+ ইতিহাস ব্যবস্থাপনা', linkGo: 'পেজে যান',
+                card2Title: 'পাবলিক সাবস্ক্রিপশন', card2Desc: '+ গ্রুপ বীমা সাবস্ক্রিপশন<br>+ ইতিহাস ব্যবস্থাপনা', linkGo2: 'পেজে যান',
+                card3Title: 'স্ট্যাটাস চেক', card3Desc: '+ বিস্তারিত চেক করুন<br>+ সার্টিফিকেট প্রদান', linkGo3: 'চেক করুন'
+            },
+            'si': {
+                langName: 'සිංහල', badge: '✨ Hyundai Marine සහකරු',
+                titleMain: 'විදේශීය සෘතුමය සේවක', titleSub: 'හදිසි අනතුරු රක්ෂණය',
+                desc: 'විදේශික ලියාපදිංචි අංකයක් නොමැති වුවද<br>විදේශ ගමන් බලපත්‍ර ඡායාරූපයක් පමණක් භාවිතා කර පහසුවෙන් ලියාපදිංචි වන්න!',
+                btnConsult: 'උපදේශනය', btnDetail: 'විස්තර බලන්න',
+                card1Title: 'පළාත් පාලන ආයතන', card1Desc: '+ කණ්ඩායම් රක්ෂණය<br>+ ඉතිහාස කළමනාකරණය', linkGo: 'පිටුවට යන්න',
+                card2Title: 'පොදු දායකත්වය', card2Desc: '+ කණ්ඩායම් රක්ෂණය<br>+ ඉතිහාස කළමනාකරණය', linkGo2: 'පිටුවට යන්න',
+                card3Title: 'තත්ත්වය පරීක්ෂා කරන්න', card3Desc: '+ විස්තර පරීක්ෂා කරන්න<br>+ සහතික නිකුත් කිරීම', linkGo3: 'පරීක්ෂා කරන්න'
+            },
+            'ta': {
+                langName: 'தமிழ்', badge: '✨ ஹூண்டாய் மெரைன் பார்ட்னர்',
+                titleMain: 'பருவகால வெளிநாட்டு ஊழியர்கள்', titleSub: 'விபத்து காப்பீடு',
+                desc: 'வெளிநாட்டு பதிவு எண் இல்லாவிட்டாலும்<br>பாஸ்போர்ட் புகைப்படத்துடன் எளிதாக பதிவு செய்யலாம்!',
+                btnConsult: 'ஆலோசனை', btnDetail: 'விவரங்கள்',
+                card1Title: 'உள்ளூர் அரசு பதிவு', card1Desc: '+ குழு காப்பீடு<br>+ வரலாறு மேலாண்மை', linkGo: 'செல்லவும்',
+                card2Title: 'பொது பதிவு', card2Desc: '+ குழு காப்பீடு<br>+ வரலாறு மேலாண்மை', linkGo2: 'செல்லவும்',
+                card3Title: 'நிலை சரிபார்ப்பு', card3Desc: '+ விவரங்களை சரிபார்க்கவும்<br>+ சான்றிதழ் வழங்குதல்', linkGo3: 'சரிபார்க்கவும்'
+            },
+            'ur': {
+                langName: 'اردو', badge: '✨ Hyundai Marine پارٹنر',
+                titleMain: 'غیر ملکی موسمی کارکنوں کیلئے', titleSub: 'حادثاتی انشورنس',
+                desc: 'اگر آپ کے پاس غیر ملکی رجسٹریشن نمبر نہیں ہے تب بھی<br>صرف پاسپورٹ تصویر کے ساتھ آسانی سے سائن اپ کریں!',
+                btnConsult: 'مشورہ', btnDetail: 'تفصیلات دیکھیں',
+                card1Title: 'مقامی حکومت', card1Desc: '+ گروپ انشورنس<br>+ ہسٹری مینجمنٹ', linkGo: 'صفحہ پر جائیں',
+                card2Title: 'عوامی سبسکرپشن', card2Desc: '+ گروپ انشورنس<br>+ ہسٹری مینجمنٹ', linkGo2: 'صفحہ پر جائیں',
+                card3Title: 'اسٹیٹس چیک کریں', card3Desc: '+ تفصیلات چیک کریں<br>+ سرٹیفکیٹ کا اجرا', linkGo3: 'چیک کریں'
+            },
+            'fa': {
+                langName: 'فارسی', badge: '✨ شریک تجاری Hyundai Marine',
+                titleMain: 'بیمه حوادث برای', titleSub: 'کارگران فصلی خارجی',
+                desc: 'حتی بدون شماره ثبت اتباع خارجی<br>ثبت نام آسان فقط با یک عکس پاسپورت!',
+                btnConsult: 'مشاوره', btnDetail: 'مشاهده جزئیات',
+                card1Title: 'ثبت نام دولت محلی', card1Desc: '+ بیمه گروهی<br>+ مدیریت سوابق', linkGo: 'برو به صفحه',
+                card2Title: 'ثبت نام عمومی', card2Desc: '+ بیمه گروهی<br>+ مدیریت سوابق', linkGo2: 'برو به صفحه',
+                card3Title: 'بررسی وضعیت', card3Desc: '+ بررسی جزئیات<br>+ صدور گواهی', linkGo3: 'بررسی کنید'
+            }
+        };
+
+        function changeLang(lang) {
+            const data = translations[lang] || translations['en'];
+
+            document.getElementById('current-lang').innerText = data.langName;
+            document.getElementById('badge-text').innerText = data.badge;
+            document.getElementById('title-main').innerText = data.titleMain;
+            document.getElementById('title-sub').innerText = data.titleSub;
+            document.getElementById('hero-desc').innerHTML = data.desc;
+            document.getElementById('btn-consult').innerText = data.btnConsult;
+            document.getElementById('btn-detail').innerText = data.btnDetail;
+            
+            document.getElementById('card1-title').innerText = data.card1Title;
+            document.getElementById('card1-desc').innerHTML = data.card1Desc;
+            document.getElementById('link-go').innerHTML = data.linkGo + ' <i class="bi bi-arrow-right"></i>';
+            
+            document.getElementById('card2-title').innerText = data.card2Title;
+            document.getElementById('card2-desc').innerHTML = data.card2Desc;
+            document.getElementById('link-go2').innerHTML = data.linkGo2 + ' <i class="bi bi-arrow-right"></i>';
+            
+            document.getElementById('card3-title').innerText = data.card3Title;
+            document.getElementById('card3-desc').innerHTML = data.card3Desc;
+            document.getElementById('link-go3').innerHTML = data.linkGo3 + ' <i class="bi bi-arrow-right"></i>';
+
+            // 하단 정보는 영어나 현지 문자가 섞여있으므로 공통값(영어 or 기본값)으로 처리하되
+            // translations 객체에 해당 키가 있으면 그걸 쓰고, 없으면 영어를 씁니다.
+            // 위 20개 언어 데이터에는 하단 번역 키(ftMenu1 등)를 한국어, 영어, 베트남어, 필리핀어만 넣어두었고
+            // 나머지는 영어(기본값)로 나오게 처리하여 코드가 너무 길어지는 것을 방지했습니다.
+            // 필요시 각 언어별로 하단 번역을 추가하면 됩니다.
+            
+            const ftData = (data.ftMenu1) ? data : translations['en']; 
+            
+            document.getElementById('ft-menu-1').innerText = ftData.ftMenu1;
+            document.getElementById('ft-menu-2').innerText = ftData.ftMenu2;
+            document.getElementById('ft-menu-3').innerText = ftData.ftMenu3;
+            document.getElementById('ft-menu-4').innerText = ftData.ftMenu4;
+            document.getElementById('ft-menu-5').innerText = ftData.ftMenu5;
+
+            document.getElementById('ft-company-name').innerText = ftData.ftCompanyName;
+            document.getElementById('ft-line-1').innerHTML = ftData.ftLine1;
+            document.getElementById('ft-line-2').innerHTML = ftData.ftLine2;
+            document.getElementById('ft-line-3').innerHTML = ftData.ftLine3;
+            document.getElementById('ft-addr').innerHTML = ftData.ftAddr;
+        }
+    </script>
 </body>
 </html>
