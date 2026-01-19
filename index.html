@@ -82,6 +82,53 @@
         .btn-outline-primary { color: #FF9F43 !important; border-color: #FF9F43 !important; }
         .btn-outline-primary:hover { background-color: #FF9F43 !important; border-color: #FF9F43 !important; color: white !important; }
         .badge { border-color: #FF9F43 !important; color: #FF9F43 !important; }
+        /* [모바일 전용 스타일] 화면 폭이 768px 이하일 때만 적용됨 */
+        @media (max-width: 768px) {
+            
+            /* 1. 상단 배너 여백 확 줄이기 */
+            .hero-section {
+                padding: 40px 0 30px !important; /* 위아래 여백을 100px -> 40px로 축소 */
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+            }
+
+            /* 2. 제목 글자 크기 줄이기 */
+            .display-4 {
+                font-size: 1.8rem !important; /* 너무 큰 제목을 적당하게 */
+                margin-bottom: 1rem !important;
+            }
+
+            /* 3. 설명글 줄이기 */
+            #hero-desc {
+                font-size: 1rem !important; /* 글자 크기 축소 */
+                margin-bottom: 1.5rem !important; /* 아래 여백 축소 */
+            }
+
+            /* 4. 일러스트(그림) 숨기기 (선택사항) */
+            /* 공간을 아끼려면 그림을 숨기는 게 가장 좋습니다. */
+            .hero-section img {
+                display: none; 
+            }
+
+            /* 5. 카드 메뉴를 더 컴팩트하게 */
+            .custom-card {
+                padding: 20px !important; /* 카드 안쪽 여백 축소 */
+                margin-bottom: 0;
+            }
+            
+            /* 카드 아이콘 크기 조절 */
+            .card-icon-box {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            /* 6. 카드 사이 간격 좁히기 */
+            .row.g-4 {
+                --bs-gutter-y: 1rem; /* 카드 위아래 간격 줄임 */
+            }
+        }
     </style>
 </head>
 <body>
