@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- ★ 핵심 1: 이제 기기 너비에 맞춰서 자동으로 조절됩니다 (반응형 필수 태그) -->
+    <!-- ★ 핵심 1: 모바일에서는 기기 폭에 맞추고, PC에서는 1900px 유지하도록 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>외국인 계절근로자 전용 상해보험 - 인스코리아</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+TC&family=Noto+Sans+SC&family=Noto+Sans+Thai&family=Noto+Sans+Lao&family=Noto+Sans+Khmer&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
 
     <style>
@@ -16,7 +16,17 @@
             font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
             background-color: #f9fbfc;
             color: #333;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+        }
+
+        /* 기본(모바일) 상태: 너비 100% */
+        #scale-wrapper {
+            width: 100%;
+            background-color: #f9fbfc;
+            padding-bottom: 50px;
+            position: relative;
         }
 
         .navbar {
@@ -27,11 +37,26 @@
 
         .hero-section {
             background-color: #f5f4f1;
-            padding: 30px 0; /* PC 여백 */
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+            padding: 40px 0; /* 모바일 여백 조정 */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
             overflow: hidden;
+        }
+
+        /* 모바일 이미지 박스 */
+        .mobile-img-box {
             position: relative;
+            height: 300px;
+            width: 100%;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .mobile-img-box img.bg {
+            position: absolute; width: 120%; right: -10%; top: 0; opacity: 0.8;
+        }
+        .mobile-img-box img.char {
+            position: absolute; width: 60%; right: 20%; top: 40px; z-index: 1;
         }
 
         .highlight-text { color: #FF9F43; font-weight: 800; }
@@ -39,270 +64,279 @@
         .custom-card {
             background: white;
             border: none;
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             height: 100%;
+            transition: 0.3s;
         }
-        .custom-card:hover { transform: translateY(-5px); }
-
+        
         .card-icon-box {
-            width: 60px; height: 60px;
-            background-color: #FFF4E6;
-            border-radius: 15px;
+            width: 50px; height: 50px;
+            background-color: #FFF4E6; border-radius: 15px;
             display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px; font-size: 28px; color: #FF9F43;
+            margin-bottom: 15px; font-size: 24px; color: #FF9F43;
         }
 
         .btn-custom {
             background-color: #FF9F43; color: white; border: none;
-            padding: 12px 30px; border-radius: 50px; font-weight: 600;
+            padding: 10px 25px; border-radius: 50px; font-weight: 600;
         }
-        .btn-outline-primary { color: #FF9F43 !important; border-color: #FF9F43 !important; }
-        .btn-outline-primary:hover { background-color: #FF9F43 !important; color: white !important; }
-        .badge { border-color: #FF9F43 !important; color: #FF9F43 !important; }
-
-        /* ★ 이미지 반응형 처리 ★ */
-        .hero-img-container {
-            position: relative;
-            height: 450px;
-            width: 100%;
-        }
-        .img-bg {
-            position: absolute; top: 0; right: -50px; width: 120%; max-width: 700px;
-        }
-        .img-char {
-            position: absolute; top: 80px; right: 100px; width: 320px; z-index: 2;
+        .btn-outline-primary {
+            color: #FF9F43 !important; border-color: #FF9F43 !important;
+            border-radius: 50px; font-weight: 600; padding: 10px 25px;
         }
 
-        /* ★★★ 모바일 전용 스타일 (화면이 좁아지면 적용됨) ★★★ */
-        @media (max-width: 991px) {
-            .hero-section {
-                padding: 40px 0 20px; /* 여백 줄임 */
-                text-align: center !important; /* 가운데 정렬 */
-                border-radius: 0 0 30px 30px;
+        /* ★ PC 전용 스타일 (992px 이상일 때만 적용) ★ */
+        @media (min-width: 992px) {
+            /* PC에서는 1900px 고정하고 스케일링 적용 */
+            #scale-wrapper {
+                width: 1900px;
+                transform-origin: top center;
+                margin: 0 auto;
             }
             
-            .hero-text-area {
-                margin-bottom: 40px; /* 글자와 그림 사이 간격 */
-                padding: 0 20px;
-            }
+            .hero-section { padding: 30px 0; border-radius: 0 0 50px 50px; }
+            
+            /* PC 이미지 위치 복원 */
+            .pc-img-box { position: relative; height: 500px; width: 100%; }
+            .pc-img-box img.bg { position: absolute; right: -100px; top: 0; width: 800px; }
+            .pc-img-box img.char { position: absolute; right: 500px; top: 130px; width: 350px; }
 
-            /* 모바일에서 이미지 배치 변경 */
-            .hero-img-container {
-                height: 350px; /* 높이 조절 */
-                margin-top: 20px;
-            }
-            .img-bg {
-                right: 50%; transform: translateX(50%); /* 가운데 정렬 */
-                width: 100%; top: 20px;
-            }
-            .img-char {
-                right: 50%; transform: translateX(50%); /* 가운데 정렬 */
-                top: 60px; width: 250px; /* 캐릭터 크기 조절 */
-            }
-
-            .display-3 { font-size: 2.2rem; } /* 제목 크기 조절 */
-            .btn-group-mobile { justify-content: center; } /* 버튼 가운데 정렬 */
+            .custom-card { padding: 40px 30px; border-radius: 24px; }
+            .card-icon-box { width: 70px; height: 70px; font-size: 30px; margin-bottom: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 네비게이션 -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#">
-                <span style="color: #157EA5;"><i class="bi bi-shield-check-fill"></i> INSKOREA</span>
-            </a>
-            
-            <div class="ms-auto">
-                <div class="dropdown">
-                    <button class="btn btn-light rounded-pill px-3 fw-bold border" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-globe2 me-1"></i> <span id="current-lang">한국어</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
-                        <li><a class="dropdown-item py-2 fw-bold" href="#" onclick="changeLang('ko')">🇰🇷 한국어</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('en')">English (영어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('vn')">Tiếng Việt (베트남)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ph')">Filipino (필리핀)</a></li>
-                        <!-- 나머지 언어는 스크립트에서 처리 -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <div id="scale-wrapper">
 
-    <!-- 메인 배너 섹션 -->
-    <section class="hero-section mt-5 pt-5">
-        <div class="container">
-            <div class="row align-items-center">
+        <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
+            <div class="container" id="nav-container">
+                <a class="navbar-brand fw-bold fs-4" href="#">
+                    <!-- 로고 이미지 -->
+                    <img src="logo.png" alt="INSKOREA" style="height: 40px; display: inline-block;">
+                </a>
                 
-                <!-- 1. 글자 설명 (모바일에서는 위로 감) -->
-                <div class="col-lg-6 hero-text-area text-center text-lg-start">
-                    <span id="badge-text" class="badge bg-white rounded-pill px-3 py-2 mb-3 shadow-sm border">
-                        ✨ 현대해상 제휴 서비스
-                    </span>
-                    <h1 class="fw-bold display-3 mb-4" style="line-height: 1.3;">
-                        <span id="title-main">외국인 계절근로자</span><br>
-                        <span id="title-sub" class="highlight-text">전용 상해보험</span>
-                    </h1>
-                    <p id="hero-desc" class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
-                        복잡한 서류 없이 여권 촬영 한 번으로!<br>
-                        지자체와 근로자 모두를 위한 가장 안전한 선택입니다.
-                    </p>
-                    <div class="d-flex gap-2 btn-group-mobile">
-                        <button id="btn-consult" class="btn btn-custom shadow" onclick="location.href='apply.html'">상담 신청하기</button>
-                        <button id="btn-detail" class="btn btn-outline-primary rounded-pill px-4 fw-bold" onclick="location.href='check.html'">자세히 보기</button>
+                <div class="ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-light rounded-pill px-3 fw-bold border" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-globe2 me-1"></i> <span id="current-lang">한국어</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
+                            <li><a class="dropdown-item py-2 fw-bold" href="#" onclick="changeLang('ko')">🇰🇷 한국어</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('en')">English (영어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('vn')">Tiếng Việt (베트남)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ph')">Filipino (필리핀)</a></li>
+                        </ul>
                     </div>
-                </div>
-                
-                <!-- 2. 이미지 영역 (모바일에서는 아래로 내려감) -->
-                <div class="col-lg-6">
-                    <div class="hero-img-container">
-                        <!-- 배경 그림 -->
-                        <img src="https://i.imgur.com/lcTaSHG.png" alt="배경" class="img-bg">
-                        <!-- 캐릭터 그림 -->
-                        <img src="https://i.imgur.com/Guk3Pgw.png" alt="캐릭터" class="img-char">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 카드 메뉴 섹션 -->
-    <section class="py-5">
-        <div class="container">
-            <!-- row-cols-1: 모바일 1줄에 1개, row-cols-lg-3: PC 1줄에 3개 -->
-            <div class="row g-4 row-cols-1 row-cols-lg-3">
-                
-                <div class="col">
-                    <div class="custom-card">
-                        <div class="card-icon-box"><i class="bi bi-building"></i></div>
-                        <h4 id="card1-title" class="fw-bold mb-3">지방자치단체 가입</h4>
-                        <p id="card1-desc" class="text-secondary mb-4">지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.</p>
-                        <a id="link-go" href="local.html" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
-                        <h4 id="card2-title" class="fw-bold mb-3">공공형 가입</h4>
-                        <p id="card2-desc" class="text-secondary mb-4">공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.</p>
-                        <a id="link-go2" href="apply.html" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
-                        <h4 id="card3-title" class="fw-bold mb-3">가입 조회</h4>
-                        <p id="card3-desc" class="text-secondary mb-4">보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.</p>
-                        <a id="link-go3" href="check.html" class="text-decoration-none fw-bold" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 하단 푸터 -->
-    <footer class="bg-white border-top py-5 mt-5">
-        <div class="container">
-            <div class="mb-4 d-flex flex-wrap gap-3 gap-md-4">
-                <a href="#" id="ft-menu-1" class="text-dark text-decoration-none fw-bold small">금융소비자보호법에 따른 고지</a>
-                <a href="#" id="ft-menu-2" class="text-dark text-decoration-none fw-bold small">개인정보처리방침</a>
-                <a href="#" id="ft-menu-3" class="text-secondary text-decoration-none small">이용약관</a>
-                <a href="#" id="ft-menu-4" class="text-secondary text-decoration-none small">단체규약</a>
-                <a href="#" id="ft-menu-5" class="text-secondary text-decoration-none small">FAQ</a>
-            </div>
-            <hr class="mb-4" style="opacity: 0.1;">
-            <div>
-                <h5 id="ft-company-name" class="fw-bold mb-3 text-dark">인스코리아</h5>
-                <div class="text-secondary small" style="line-height: 1.7; font-size: 13px;">
-                    <p class="mb-1" id="ft-line-1"><span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리</p>
-                    <p class="mb-1" id="ft-line-2">사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제2025110022호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호</p>
-                    <p class="mb-1" id="ft-line-3"><span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)</p>
-                    <p class="mb-0" id="ft-addr"><span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호</p>
                 </div>
             </div>
-            <div class="mt-4 text-secondary small opacity-50">Copyright © INSKOREA Co., Ltd. All rights reserved.</div>
-        </div>
-    </footer>
+        </nav>
+
+        <section class="hero-section text-center text-lg-start" style="margin-top: 60px;">
+            <div class="container" id="hero-container">
+                <div class="row align-items-center">
+                    <!-- 텍스트 영역: 모바일/PC 모두 12칸(전체) 쓰다가 PC에서만 6칸(절반) -->
+                    <div class="col-12 col-lg-6 pt-4 pt-lg-0">
+                        <span id="badge-text" class="badge bg-white rounded-pill px-3 py-2 mb-3 shadow-sm border">
+                            ✨ 현대해상 제휴 서비스
+                        </span>
+                        <h1 class="fw-bold display-4 mb-4" style="line-height: 1.3; font-size: calc(1.8rem + 1.5vw);">
+                            <span id="title-main">외국인 계절근로자</span><br>
+                            <span id="title-sub" class="highlight-text">전용 상해보험</span>
+                        </h1>
+                        <p id="hero-desc" class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
+                            복잡한 서류 없이 여권 촬영 한 번으로!<br>
+                            지자체와 근로자 모두를 위한 가장 안전한 선택입니다.
+                        </p>
+                        <div class="d-flex gap-2 justify-content-center justify-content-lg-start">
+                            <button id="btn-consult" class="btn btn-custom shadow" onclick="location.href='apply.html'">상담 신청하기</button>
+                            <button id="btn-detail" class="btn btn-outline-primary" onclick="location.href='check.html'">자세히 보기</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 이미지 영역 -->
+                    <div class="col-12 col-lg-6 text-center">
+                        <!-- PC용 이미지 배치 -->
+                        <div class="d-none d-lg-block pc-img-box">
+                             <img src="https://i.imgur.com/lcTaSHG.png" alt="배경" class="bg">
+                             <img src="https://i.imgur.com/Guk3Pgw.png" alt="캐릭터" class="char">
+                        </div>
+                        <!-- 모바일용 이미지 배치 (모바일에서만 보임) -->
+                        <div class="d-block d-lg-none mobile-img-box">
+                             <img src="https://i.imgur.com/lcTaSHG.png" alt="배경" class="bg">
+                             <img src="https://i.imgur.com/Guk3Pgw.png" alt="캐릭터" class="char">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★ 모바일 카드 배치 수정: col-6 (한 줄에 2개) ★ -->
+        <section class="py-5" style="margin-top: -30px;">
+            <div class="container" id="card-container">
+                <div class="row g-3"> <!-- 간격(Gap) 3으로 조정 -->
+                    
+                    <!-- 카드 1 -->
+                    <div class="col-6 col-lg-4"> <!-- 모바일: 6(절반), PC: 4(1/3) -->
+                        <div class="custom-card">
+                            <div class="card-icon-box"><i class="bi bi-building"></i></div>
+                            <h5 id="card1-title" class="fw-bold mb-2">지방자치단체 가입</h5>
+                            <p id="card1-desc" class="text-secondary small mb-3">지자체 담당자를 위한 전용 페이지입니다.</p>
+                            <a id="link-go" href="local.html" class="text-decoration-none fw-bold small" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 카드 2 -->
+                    <div class="col-6 col-lg-4">
+                        <div class="custom-card">
+                            <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
+                            <h5 id="card2-title" class="fw-bold mb-2">공공형 가입</h5>
+                            <p id="card2-desc" class="text-secondary small mb-3">공공형 계절근로자를 위한 보험 가입 메뉴입니다.</p>
+                            <a id="link-go2" href="apply.html" class="text-decoration-none fw-bold small" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 카드 3 -->
+                    <div class="col-6 col-lg-4">
+                        <div class="custom-card">
+                            <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
+                            <h5 id="card3-title" class="fw-bold mb-2">가입 조회</h5>
+                            <p id="card3-desc" class="text-secondary small mb-3">보험 가입이 잘 되었는지 궁금하신가요?</p>
+                            <a id="link-go3" href="check.html" class="text-decoration-none fw-bold small" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-white border-top py-5 mt-5">
+            <div class="container" id="footer-container">
+                <div class="mb-4 d-flex flex-wrap gap-3">
+                    <a href="#" id="ft-menu-1" class="text-dark text-decoration-none fw-bold small">금융소비자보호법에 따른 고지</a>
+                    <a href="#" id="ft-menu-2" class="text-dark text-decoration-none fw-bold small">개인정보처리방침</a>
+                    <a href="#" id="ft-menu-3" class="text-secondary text-decoration-none small">이용약관</a>
+                    <a href="#" id="ft-menu-4" class="text-secondary text-decoration-none small">FAQ</a>
+                </div>
+                <hr class="mb-4" style="opacity: 0.1;">
+                <div>
+                    <h5 id="ft-company-name" class="fw-bold mb-3 text-dark">인스코리아</h5>
+                    <div class="text-secondary small" style="line-height: 1.7; font-size: 13px;">
+                        <p class="mb-1" id="ft-line-1"><span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리</p>
+                        <p class="mb-1" id="ft-line-2">사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제2025110022호</p>
+                        <p class="mb-1" id="ft-line-3"><span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심 11:30~13:00)</p>
+                        <p class="mb-0" id="ft-addr"><span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호</p>
+                    </div>
+                </div>
+                <div class="mt-4 text-secondary small opacity-50">Copyright © INSKOREA Co., Ltd. All rights reserved.</div>
+            </div>
+        </footer>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // ★ 자바스크립트는 이제 번역 기능만 남겼습니다 (자동 축소 기능 삭제) ★
-        // 브라우저가 알아서 반응형으로 처리하도록 만들었기 때문입니다.
+        // ★ 화면 크기 자동 조절 (PC에서만 작동하도록 수정) ★
+        function fitContent() {
+            var wrapper = document.getElementById('scale-wrapper');
+            var windowWidth = window.innerWidth;
+            var baseWidth = 1900;
 
+            // 모바일(992px 미만)에서는 스크립트가 개입하지 않고 CSS 반응형에 맡김
+            if (windowWidth < 992) {
+                wrapper.style.transform = 'none';
+                wrapper.style.width = '100%';
+                wrapper.style.height = 'auto';
+                document.body.style.height = 'auto';
+            } 
+            // PC(992px 이상)에서 창이 1900보다 작을 때만 축소 (Zoom Out)
+            else if (windowWidth < baseWidth) {
+                var scale = windowWidth / baseWidth;
+                wrapper.style.transform = 'scale(' + scale + ')';
+                wrapper.style.transformOrigin = 'top center';
+                wrapper.style.width = baseWidth + 'px';
+                document.body.style.height = (wrapper.offsetHeight * scale) + 'px';
+            } 
+            // 초대형 화면
+            else {
+                wrapper.style.transform = 'scale(1)';
+                wrapper.style.transformOrigin = 'top center';
+                wrapper.style.width = baseWidth + 'px';
+                wrapper.style.margin = '0 auto';
+                document.body.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', fitContent);
+        window.addEventListener('DOMContentLoaded', fitContent);
+
+        // --- 번역 데이터 (내용 동일) ---
         const translations = {
             'ko': {
                 langName: '한국어', badge: '✨ 현대해상 제휴 서비스',
                 titleMain: '외국인 계절근로자', titleSub: '전용 상해보험',
                 desc: '복잡한 서류 없이 여권 촬영 한 번으로!<br>지자체와 근로자 모두를 위한 가장 안전한 선택입니다.',
                 btnConsult: '상담 신청하기', btnDetail: '자세히 보기',
-                card1Title: '지방자치단체 가입', card1Desc: '지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.', linkGo: '바로가기',
-                card2Title: '공공형 가입', card2Desc: '공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.', linkGo2: '바로가기',
-                card3Title: '가입 조회', card3Desc: '보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.', linkGo3: '조회하기',
-                ftMenu1: '금융소비자보호법에 따른 고지', ftMenu2: '개인정보처리방침', ftMenu3: '이용약관', ftMenu4: '단체규약', ftMenu5: 'FAQ',
+                card1Title: '지방자치단체 가입', card1Desc: '지자체 담당자 전용 페이지', linkGo: '바로가기',
+                card2Title: '공공형 가입', card2Desc: '공공형 계절근로자 보험 가입', linkGo2: '바로가기',
+                card3Title: '가입 조회', card3Desc: '보험 가입 내역 즉시 확인', linkGo3: '조회하기',
+                ftMenu1: '금융소비자보호법 고지', ftMenu2: '개인정보처리방침', ftMenu3: '이용약관', ftMenu4: 'FAQ',
                 ftCompanyName: '인스코리아', ftLine1: '<span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리',
-                ftLine2: '사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제2025110022호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호',
-                ftLine3: '<span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)',
-                ftAddr: '<span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호'
+                ftLine2: '사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제2025110022호',
+                ftLine3: '<span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30)',
+                ftAddr: '<span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10'
             },
             'en': {
                 langName: 'English', badge: '✨ Hyundai Marine Partnership',
                 titleMain: 'Accident insurance for', titleSub: 'foreign seasonal workers',
-                desc: 'Even if you don\'t have an alien registration number<br>No identity verification required with just one passport photo<br>Super easy insurance subscription!',
-                btnConsult: 'Consultation', btnDetail: 'View Details',
-                card1Title: 'Joining local governments', card1Desc: '+ Group insurance subscription<br>+ Group history management', linkGo: 'Go to Page',
-                card2Title: 'Public subscription', card2Desc: '+ Group insurance subscription<br>+ Group history management', linkGo2: 'Go to Page',
-                card3Title: 'Subscription Inquiry', card3Desc: '+ Check subscription details<br>+ Issuance of membership certificate', linkGo3: 'Check Now',
-                ftMenu1: 'Financial Consumer Protection Notice', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms of Use', ftMenu4: 'Group Regulations', ftMenu5: 'FAQ',
+                desc: 'Simple sign-up with just a passport photo!<br>No complex documents required.',
+                btnConsult: 'Consultation', btnDetail: 'Details',
+                card1Title: 'Local Gov Sign-up', card1Desc: 'For local government officials', linkGo: 'Go to Page',
+                card2Title: 'Public Sign-up', card2Desc: 'Public seasonal worker insurance', linkGo2: 'Go to Page',
+                card3Title: 'Check Status', card3Desc: 'Check your insurance status', linkGo3: 'Check Now',
+                ftMenu1: 'Consumer Protection', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'FAQ',
                 ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Company :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
-                ftLine2: 'Business Reg. No : 780-22-02367 <span class="mx-2">|</span> Ins. Assoc. Reg. No : 123456789 <span class="d-none d-md-inline mx-2">|</span> Mail Order Report : 2025 Seoul Mapo 0000',
-                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span> (Weekdays 9:00~17:30 / Closed on Weekends)',
-                ftAddr: '<span class="fw-bold">Address :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                ftLine2: 'Business Reg. No : 780-22-02367 <span class="mx-2">|</span> Ins. Assoc. Reg. No : 2025110022',
+                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Address :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             },
             'vn': {
                 langName: 'Tiếng Việt', badge: '✨ Đối tác bảo hiểm Hyundai',
-                titleMain: 'Người lao động thời vụ', titleSub: 'Bảo hiểm tai nạn',
-                desc: 'Ngay cả khi bạn không có số đăng ký người nước ngoài.<br>Không cần xác minh danh tính, chỉ cần một ảnh hộ chiếu.<br>Đăng ký bảo hiểm cực kỳ dễ dàng!',
-                btnConsult: 'Tư vấn', btnDetail: 'Xem chi tiết',
-                card1Title: 'Tham gia chính quyền địa phương', card1Desc: '+ Đăng ký bảo hiểm nhóm<br>+ Quản lý lịch sử nhóm', linkGo: 'Đi đến trang',
-                card2Title: 'Đăng ký công khai', card2Desc: '+ Đăng ký bảo hiểm nhóm<br>+ Quản lý lịch sử nhóm', linkGo2: 'Đi đến trang',
-                card3Title: 'Tra cứu đăng ký', card3Desc: '+ Kiểm tra chi tiết đăng ký<br>+ Cấp giấy chứng nhận thành viên', linkGo3: 'Kiểm tra ngay',
-                ftMenu1: 'Thông báo Luật Bảo vệ Người tiêu dùng', ftMenu2: 'Chính sách bảo mật', ftMenu3: 'Điều khoản', ftMenu4: 'Quy định nhóm', ftMenu5: 'FAQ',
-                ftCompanyName: 'Công ty TNHH INSKOREA', ftLine1: '<span class="fw-bold">Tên công ty :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Đại diện :</span> Seo Yuri',
-                ftLine2: 'ĐKKD : 780-22-02367 <span class="mx-2">|</span> Hiệp hội Bảo hiểm : 123456789 <br> Báo cáo bán hàng : 2025 Seoul Mapo 0000',
-                ftLine3: '<span class="fw-bold">CSKH : 010 7546 5568</span> (9:00~17:30 các ngày trong tuần)',
-                ftAddr: '<span class="fw-bold">Địa chỉ :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                titleMain: 'Bảo hiểm tai nạn', titleSub: 'Lao động thời vụ',
+                desc: 'Đăng ký đơn giản chỉ với ảnh hộ chiếu!<br>Không cần giấy tờ phức tạp.',
+                btnConsult: 'Tư vấn', btnDetail: 'Chi tiết',
+                card1Title: 'Chính quyền địa phương', card1Desc: 'Dành cho cán bộ địa phương', linkGo: 'Đi đến trang',
+                card2Title: 'Đăng ký công khai', card2Desc: 'Bảo hiểm lao động công cộng', linkGo2: 'Đi đến trang',
+                card3Title: 'Tra cứu đăng ký', card3Desc: 'Kiểm tra trạng thái bảo hiểm', linkGo3: 'Kiểm tra',
+                ftMenu1: 'Bảo vệ người tiêu dùng', ftMenu2: 'Chính sách bảo mật', ftMenu3: 'Điều khoản', ftMenu4: 'FAQ',
+                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Công ty :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Đại diện :</span> Seo Yuri',
+                ftLine2: 'ĐKKD : 780-22-02367 <span class="mx-2">|</span> Hiệp hội BH : 2025110022',
+                ftLine3: '<span class="fw-bold">CSKH : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Địa chỉ :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             },
             'ph': {
                 langName: 'Filipino', badge: '✨ Partner ng Hyundai Marine',
-                titleMain: 'Seguro sa aksidente para sa', titleSub: 'mga pana-panahong manggagawa',
-                desc: 'Kahit na wala kang numero ng rehistrasyon bilang dayuhan<br>Hindi kailangan ng beripikasyon, litrato ng pasaporte lang<br>Napakadaling mag-subscribe sa insurance!',
-                btnConsult: 'Konsultasyon', btnDetail: 'Tingnan',
-                card1Title: 'Pagsali sa mga lokal na pamahalaan', card1Desc: '+ Subskripsyon sa seguro ng grupo<br>+ Pamamahala ng kasaysayan', linkGo: 'Pumunta',
-                card2Title: 'Pampublikong suskrisyon', card2Desc: '+ Subskripsyon sa seguro ng grupo<br>+ Pamamahala ng kasaysayan', linkGo2: 'Pumunta',
-                card3Title: 'Katanungan tungkol sa Suskrisyon', card3Desc: '+ Suriin ang mga detalye<br>+ Sertipiko ng pagiging miyembro', linkGo3: 'Suriin',
-                ftMenu1: 'Paunawa sa Proteksyon ng Mamimili', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'Regulasyon', ftMenu5: 'FAQ',
-                ftCompanyName: 'INSKOREA Co., Ltd.', ftLine1: '<span class="fw-bold">Kompanya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Kinatawan :</span> Seo Yuri',
-                ftLine2: 'Negosyo Blg : 780-22-02367 <span class="mx-2">|</span> Asosasyon ng Seguro : 123456789 <br> Mail Order : 2025 Seoul Mapo 0000',
-                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span> (Weekdays 9:00~17:30)',
-                ftAddr: '<span class="fw-bold">Address :</span> #1212, Sinan Metrokhan, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                titleMain: 'Seguro sa aksidente', titleSub: 'Pana-panahong manggagawa',
+                desc: 'Mag-sign up gamit ang pasaporte lang!<br>Walang kumplikadong dokumento.',
+                btnConsult: 'Konsultasyon', btnDetail: 'Detalye',
+                card1Title: 'Lokal na Pamahalaan', card1Desc: 'Para sa mga opisyal', linkGo: 'Pumunta',
+                card2Title: 'Pampublikong Sign-up', card2Desc: 'Seguro para sa manggagawa', linkGo2: 'Pumunta',
+                card3Title: 'Suriin ang Katayuan', card3Desc: 'Suriin ang status ng seguro', linkGo3: 'Suriin',
+                ftMenu1: 'Proteksyon ng Mamimili', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'FAQ',
+                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Kompanya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Kinatawan :</span> Seo Yuri',
+                ftLine2: 'Negosyo Blg : 780-22-02367 <span class="mx-2">|</span> Asosasyon ng Seguro : 2025110022',
+                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Address :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             }
         };
 
         function changeLang(lang) {
             const data = translations[lang] || translations['en'];
-
             document.getElementById('current-lang').innerText = data.langName;
             document.getElementById('badge-text').innerText = data.badge;
             document.getElementById('title-main').innerText = data.titleMain;
@@ -310,25 +344,21 @@
             document.getElementById('hero-desc').innerHTML = data.desc;
             document.getElementById('btn-consult').innerText = data.btnConsult;
             document.getElementById('btn-detail').innerText = data.btnDetail;
-            
             document.getElementById('card1-title').innerText = data.card1Title;
-            document.getElementById('card1-desc').innerHTML = data.card1Desc;
+            document.getElementById('card1-desc').innerText = data.card1Desc;
             document.getElementById('link-go').innerHTML = data.linkGo + ' <i class="bi bi-arrow-right"></i>';
-            
             document.getElementById('card2-title').innerText = data.card2Title;
-            document.getElementById('card2-desc').innerHTML = data.card2Desc;
+            document.getElementById('card2-desc').innerText = data.card2Desc;
             document.getElementById('link-go2').innerHTML = data.linkGo2 + ' <i class="bi bi-arrow-right"></i>';
-            
             document.getElementById('card3-title').innerText = data.card3Title;
-            document.getElementById('card3-desc').innerHTML = data.card3Desc;
+            document.getElementById('card3-desc').innerText = data.card3Desc;
             document.getElementById('link-go3').innerHTML = data.linkGo3 + ' <i class="bi bi-arrow-right"></i>';
-
+            
             const ftData = (data.ftMenu1) ? data : translations['en']; 
             document.getElementById('ft-menu-1').innerText = ftData.ftMenu1;
             document.getElementById('ft-menu-2').innerText = ftData.ftMenu2;
             document.getElementById('ft-menu-3').innerText = ftData.ftMenu3;
             document.getElementById('ft-menu-4').innerText = ftData.ftMenu4;
-            document.getElementById('ft-menu-5').innerText = ftData.ftMenu5;
             document.getElementById('ft-company-name').innerText = ftData.ftCompanyName;
             document.getElementById('ft-line-1').innerHTML = ftData.ftLine1;
             document.getElementById('ft-line-2').innerHTML = ftData.ftLine2;
