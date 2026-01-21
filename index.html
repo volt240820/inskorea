@@ -17,14 +17,14 @@
             color: #333;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* 가로 스크롤 숨김 */
+            /* 최소 너비 고정 */
+            min-width: 1900px;
         }
 
         /* ★ 핵심 수정: 전체를 감싸는 틀 (스케일링 대상) ★ */
         #scale-wrapper {
             width: 1900px; /* 기준 해상도 고정 */
-            margin: 0 auto; /* 큰 화면에서는 중앙 정렬 */
-            transform-origin: top center; /* 축소 기준점 */
+            margin: 0 auto; /* 큰 화면에서는 중앙 정렬 *
             background-color: #f9fbfc; /* 배경색 통일 */
             padding-bottom: 50px;
             position: relative;
@@ -221,33 +221,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // ★ 화면 자동 맞춤 스크립트 (모바일 완벽 대응 버전) ★
-        function fitScreen() {
-            var wrapper = document.getElementById('scale-wrapper');
-            var windowWidth = window.innerWidth; // 현재 기기의 실제 크기
-            var baseWidth = 1900; // 우리가 만든 홈페이지 원래 크기
-
-            // 1. 화면이 1900px보다 작을 때 (모바일/태블릿/노트북)
-            if (windowWidth < baseWidth) {
-                var scale = windowWidth / baseWidth; // 축소 비율 계산
-                
-                wrapper.style.transform = 'scale(' + scale + ')';
-                wrapper.style.transformOrigin = 'top left'; // 왼쪽 위를 기준으로 축소
-                wrapper.style.width = baseWidth + 'px'; // 내부 크기는 1800 유지
-                
-                // 축소된 만큼 빈 공간이 생기지 않도록 높이 줄이기
-                document.body.style.height = (wrapper.offsetHeight * scale) + 'px';
-                document.body.style.overflowX = 'hidden'; // 가로 스크롤 강제 삭제
-            } 
-            // 2. 화면이 1900px보다 클 때 (초대형 모니터)
-            else {
-                wrapper.style.transform = 'scale(1)';
-                wrapper.style.transformOrigin = 'top center';
-                wrapper.style.width = baseWidth + 'px';
-                wrapper.style.margin = '0 auto';
-                document.body.style.height = 'auto';
-            }
-        }
 
         window.addEventListener('resize', fitScreen);
         window.addEventListener('DOMContentLoaded', fitScreen);
@@ -495,3 +468,4 @@
     </script>
 </body>
 </html>
+
