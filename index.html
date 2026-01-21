@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>외국인 계절근로자 전용 상해보험 - 인스코리아</title>
     
-    <!-- 디자인(부트스트랩) 및 폰트 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- 다국어 폰트 깨짐 방지를 위한 폰트 설정 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+TC&family=Noto+Sans+SC&family=Noto+Sans+Thai&family=Noto+Sans+Lao&family=Noto+Sans+Khmer&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
 
     <style>
-        /* 모든 언어가 깨지지 않도록 글로벌 폰트 적용 */
         body {
-            font-family: 'Pretendard', 'Noto Sans KR', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans Thai', 'Noto Sans Lao', 'Noto Sans Khmer', 'Noto Sans Bengali', sans-serif;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
             background-color: #f9fbfc;
             color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* 가로 스크롤 숨김 */
+        }
+
+        /* ★ 핵심 수정: 전체를 감싸는 틀 (스케일링 대상) ★ */
+        #scale-wrapper {
+            width: 1900px; /* 기준 해상도 고정 */
+            margin: 0 auto; /* 큰 화면에서는 중앙 정렬 */
+            transform-origin: top center; /* 축소 기준점 */
+            background-color: #f9fbfc; /* 배경색 통일 */
+            padding-bottom: 50px;
+            position: relative;
         }
 
         .navbar {
@@ -26,19 +36,14 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
         }
 
-        .dropdown-menu {
-            max-height: 400px; 
-            overflow-y: auto;
-        }
-        .dropdown-menu::-webkit-scrollbar { width: 8px; }
-        .dropdown-menu::-webkit-scrollbar-thumb { background-color: #ddd; border-radius: 4px; }
-        .dropdown-menu::-webkit-scrollbar-track { background-color: transparent; }
+        .dropdown-menu { max-height: 400px; overflow-y: auto; }
 
         .hero-section {
             background-color: #f5f4f1;
-            padding: 100px 0 80px;
+            padding: 30px 0 30px;
             border-bottom-left-radius: 50px;
             border-bottom-right-radius: 50px;
+            overflow: hidden;
         }
 
         .highlight-text { color: #FF9F43; font-weight: 800; }
@@ -82,182 +87,172 @@
         .btn-outline-primary { color: #FF9F43 !important; border-color: #FF9F43 !important; }
         .btn-outline-primary:hover { background-color: #FF9F43 !important; border-color: #FF9F43 !important; color: white !important; }
         .badge { border-color: #FF9F43 !important; color: #FF9F43 !important; }
-        /* [모바일 전용 스타일] 화면 폭이 768px 이하일 때만 적용됨 */
-        @media (max-width: 768px) {
-            
-            /* 1. 상단 배너 여백 확 줄이기 */
-            .hero-section {
-                padding: 40px 0 30px !important; /* 위아래 여백을 100px -> 40px로 축소 */
-                border-bottom-left-radius: 30px;
-                border-bottom-right-radius: 30px;
-            }
-
-            /* 2. 제목 글자 크기 줄이기 */
-            .display-4 {
-                font-size: 1.8rem !important; /* 너무 큰 제목을 적당하게 */
-                margin-bottom: 1rem !important;
-            }
-
-            /* 3. 설명글 줄이기 */
-            #hero-desc {
-                font-size: 1rem !important; /* 글자 크기 축소 */
-                margin-bottom: 1.5rem !important; /* 아래 여백 축소 */
-            }
-
-            /* 4. 일러스트(그림) 숨기기 (선택사항) */
-            /* 공간을 아끼려면 그림을 숨기는 게 가장 좋습니다. */
-            .hero-section img {
-                display: none; 
-            }
-
-            /* 5. 카드 메뉴를 더 컴팩트하게 */
-            .custom-card {
-                padding: 20px !important; /* 카드 안쪽 여백 축소 */
-                margin-bottom: 0;
-            }
-            
-            /* 카드 아이콘 크기 조절 */
-            .card-icon-box {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-                margin-bottom: 15px;
-            }
-
-            /* 6. 카드 사이 간격 좁히기 */
-            .row.g-4 {
-                --bs-gutter-y: 1rem; /* 카드 위아래 간격 줄임 */
-            }
-        }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#">
-                <span style="color: #157EA5;"><i class="bi bi-shield-check-fill"></i> INSKOREA</span>
-            </a>
-            
-            <div class="ms-auto">
-                <div class="dropdown">
-                    <button class="btn btn-light rounded-pill px-3 fw-bold border" type="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-globe2 me-1"></i> <span id="current-lang">한국어</span>
-                    </button>
-                    <!-- 모든 언어 리스트 연결 -->
-                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
-                        <li><a class="dropdown-item py-2 fw-bold" href="#" onclick="changeLang('ko')">🇰🇷 한국어</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('en')">English (영어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('vn')">Tiếng Việt (베트남)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ph')">Filipino (필리핀)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('lo')">ພາສາລາວ (라오스)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('km')">ភាសាខ្មែរ (캄보디아)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mn')">Монгол (몽골)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ru')">Русский (러시아어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('uz')">O'zbek (우즈베크어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('id')">Indonesia (인도네시아어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('cn')">简体中文 (중국-간체)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('tw')">繁體中文 (중국-번체)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('kg')">Кыргызча (키르기스어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('th')">แบบไทย (태국어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mm')">မြန်မာ (미얀마어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('bn')">বাংলা (벵골어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('si')">සිංහල (신할라어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ta')">தமிழ் (타밀어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ur')">اردو (우르두어)</a></li>
-                        <li><a class="dropdown-item py-2" href="#" onclick="changeLang('fa')">فارسی (페르시아어)</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- ★ 스케일링 래퍼 시작 ★ -->
+    <div id="scale-wrapper">
 
-    <section class="hero-section text-center text-md-start">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 order-2 order-md-1 mt-5 mt-md-0">
-                    <span id="badge-text" class="badge bg-white rounded-pill px-3 py-2 mb-3 shadow-sm border">
-                          ✨ 현대해상 제휴 서비스
-                    </span>
-                    <h1 class="fw-bold display-4 mb-4" style="line-height: 1.3;">
-                        <span id="title-main">외국인 계절근로자</span><br>
-                        <span id="title-sub" class="highlight-text">전용 상해보험</span>
-                    </h1>
-                    <p id="hero-desc" class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
-                        복잡한 서류 없이 여권 촬영 한 번으로!<br>
-                        지자체와 근로자 모두를 위한 가장 안전한 선택입니다.
-                    </p>
-                    <div class="d-flex gap-2 justify-content-center justify-content-md-start">
-                        <button id="btn-consult" class="btn btn-custom shadow">상담 신청하기</button>
-                        <button id="btn-detail" class="btn btn-outline-primary rounded-pill px-4 fw-bold">자세히 보기</button>
+        <nav class="navbar navbar-expand-lg fixed-top" style="position: absolute; width: 100%;">
+            <div class="container" style="max-width: 1200px;">
+                <a class="navbar-brand fw-bold fs-4" href="#">
+                    <span style="color: #157EA5;"><i class="bi bi-shield-check-fill"></i> INSKOREA</span>
+                </a>
+                
+                <div class="ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-light rounded-pill px-3 fw-bold border" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-globe2 me-1"></i> <span id="current-lang">한국어</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2">
+                            <li><a class="dropdown-item py-2 fw-bold" href="#" onclick="changeLang('ko')">🇰🇷 한국어</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('en')">English (영어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('vn')">Tiếng Việt (베트남)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ph')">Filipino (필리핀)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('lo')">ພາສາລາວ (라오스)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('km')">ភាសាខ្មែរ (캄보디아)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mn')">Монгол (몽골)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ru')">Русский (러시아어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('uz')">O'zbek (우즈베크어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('id')">Indonesia (인도네시아어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('cn')">简体中文 (중국-간체)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('tw')">繁體中文 (중국-번체)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('kg')">Кыргызча (키르기스어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('th')">แบบไทย (태국어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('mm')">မြန်မာ (미얀마어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('bn')">বাংলা (벵골어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('si')">සිංහල (신할라어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ta')">தமிழ் (타밀어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('ur')">اردو (우르두어)</a></li>
+                            <li><a class="dropdown-item py-2" href="#" onclick="changeLang('fa')">فارسی (페르시아어)</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-6 order-1 order-md-2 text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/9472/9472322.png" alt="보험 일러스트" class="img-fluid" style="max-width: 80%; drop-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            </div>
+        </nav>
+
+        <section class="hero-section text-center text-md-start">
+            <div class="container" style="max-width: 1200px;">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <span id="badge-text" class="badge bg-white rounded-pill px-3 py-2 mb-3 shadow-sm border">
+                            ✨ 현대해상 제휴 서비스
+                        </span>
+                        <h1 class="fw-bold display-4 mb-4" style="line-height: 1.3;">
+                            <span id="title-main">외국인 계절근로자</span><br>
+                            <span id="title-sub" class="highlight-text">전용 상해보험</span>
+                        </h1>
+                        <p id="hero-desc" class="text-secondary fs-5 mb-5" style="word-break: keep-all;">
+                            복잡한 서류 없이 여권 촬영 한 번으로!<br>
+                            지자체와 근로자 모두를 위한 가장 안전한 선택입니다.
+                        </p>
+                        <div class="d-flex gap-2">
+                            <button id="btn-consult" class="btn btn-custom shadow" onclick="location.href='apply.html'">상담 신청하기</button>
+                            <button id="btn-detail" class="btn btn-outline-primary rounded-pill px-4 fw-bold" onclick="location.href='check.html'">자세히 보기</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 order-1 order-md-2 text-center">
+                    <img src="https://i.imgur.com/lcTaSHG.png" alt="보험 일러스트" class="img-fluid" style="max-width: 150%; margin-top: 30px; margin-left: -200px; drop-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                    <img src="https://i.imgur.com/Guk3Pgw.png" alt="보험 일러스트" class="img-fluid" style="max-width: 55%; margin-top: 30px; margin-left: -700px; drop-shadow: 0 20px 40px rgba(0,0,0,0.1);">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5" style="margin-top: -50px;">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="custom-card">
-                        <div class="card-icon-box"><i class="bi bi-building"></i></div>
-                        <h4 id="card1-title" class="fw-bold mb-3">지방자치단체 가입</h4>
-                        <p id="card1-desc" class="text-secondary mb-4">지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.</p>
-                        <a id="link-go" href="#" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+        <section class="py-5" style="margin-top: -50px;">
+            <div class="container" style="max-width: 1200px;">
+                <div class="row g-4">
+                    <div class="col-4">
+                        <div class="custom-card">
+                            <div class="card-icon-box"><i class="bi bi-building"></i></div>
+                            <h4 id="card1-title" class="fw-bold mb-3">지방자치단체 가입</h4>
+                            <p id="card1-desc" class="text-secondary mb-4">지자체 담당자를 위한 전용 페이지입니다. 단체 가입과 이력을 관리하세요.</p>
+                            <a id="link-go" href="local.html" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
-                        <h4 id="card2-title" class="fw-bold mb-3">공공형 가입</h4>
-                        <p id="card2-desc" class="text-secondary mb-4">공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.</p>
-                        <a id="link-go2" href="#" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                    <div class="col-4">
+                        <div class="custom-card">
+                            <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
+                            <h4 id="card2-title" class="fw-bold mb-3">공공형 가입</h4>
+                            <p id="card2-desc" class="text-secondary mb-4">공공형 계절근로자를 위한 보험 가입 메뉴입니다. 쉽고 빠르게 처리하세요.</p>
+                            <a id="link-go2" href="apply.html" class="text-decoration-none fw-bold" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="custom-card">
-                        <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
-                        <h4 id="card3-title" class="fw-bold mb-3">가입 조회</h4>
-                        <p id="card3-desc" class="text-secondary mb-4">보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.</p>
-                        <a id="link-go3" href="#" class="text-decoration-none fw-bold" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
+                    <div class="col-4">
+                        <div class="custom-card">
+                            <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
+                            <h4 id="card3-title" class="fw-bold mb-3">가입 조회</h4>
+                            <p id="card3-desc" class="text-secondary mb-4">보험 가입이 잘 되었는지 궁금하신가요? 여기서 즉시 확인해보세요.</p>
+                            <a id="link-go3" href="check.html" class="text-decoration-none fw-bold" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="bg-white border-top py-5 mt-5" style="border-top: 1px solid #eee;">
-        <div class="container">
-            <div class="mb-4 d-flex flex-wrap gap-3 gap-md-4">
-                <a href="#" id="ft-menu-1" class="text-dark text-decoration-none fw-bold small">금융소비자보호법에 따른 고지</a>
-                <a href="#" id="ft-menu-2" class="text-dark text-decoration-none fw-bold small">개인정보처리방침</a>
-                <a href="#" id="ft-menu-3" class="text-secondary text-decoration-none small">이용약관</a>
-                <a href="#" id="ft-menu-4" class="text-secondary text-decoration-none small">단체규약</a>
-                <a href="#" id="ft-menu-5" class="text-secondary text-decoration-none small">FAQ</a>
-            </div>
-            <hr class="mb-4" style="opacity: 0.1;">
-            <div>
-                <h5 id="ft-company-name" class="fw-bold mb-3 text-dark">인스코리아</h5>
-                <div class="text-secondary small" style="line-height: 1.7; font-size: 13px;">
-                    <p class="mb-1" id="ft-line-1"><span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리</p>
-                    <p class="mb-1" id="ft-line-2">사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제123456789호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호</p>
-                    <p class="mb-1" id="ft-line-3"><span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)</p>
-                    <p class="mb-0" id="ft-addr"><span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호</p>
+        <footer class="bg-white border-top py-5 mt-5" style="border-top: 1px solid #eee;">
+            <div class="container" style="max-width: 1200px;">
+                <div class="mb-4 d-flex flex-wrap gap-3 gap-md-4">
+                    <a href="#" id="ft-menu-1" class="text-dark text-decoration-none fw-bold small">금융소비자보호법에 따른 고지</a>
+                    <a href="#" id="ft-menu-2" class="text-dark text-decoration-none fw-bold small">개인정보처리방침</a>
+                    <a href="#" id="ft-menu-3" class="text-secondary text-decoration-none small">이용약관</a>
+                    <a href="#" id="ft-menu-4" class="text-secondary text-decoration-none small">단체규약</a>
+                    <a href="#" id="ft-menu-5" class="text-secondary text-decoration-none small">FAQ</a>
                 </div>
+                <hr class="mb-4" style="opacity: 0.1;">
+                <div>
+                    <h5 id="ft-company-name" class="fw-bold mb-3 text-dark">인스코리아</h5>
+                    <div class="text-secondary small" style="line-height: 1.7; font-size: 13px;">
+                        <p class="mb-1" id="ft-line-1"><span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리</p>
+                        <p class="mb-1" id="ft-line-2">사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제123456789호 <span class="d-none d-md-inline mx-2">|</span> 통신판매신고 : 제2025 서울마포 0000호</p>
+                        <p class="mb-1" id="ft-line-3"><span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30 / 점심시간 11:30~13:00 / 주말 및 공휴일 휴무)</p>
+                        <p class="mb-0" id="ft-addr"><span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호</p>
+                    </div>
+                </div>
+                <div class="mt-4 text-secondary small opacity-50">Copyright © INSKOREA Co., Ltd. All rights reserved.</div>
             </div>
-            <div class="mt-4 text-secondary small opacity-50">Copyright © INSKOREA Co., Ltd. All rights reserved.</div>
-        </div>
-    </footer>
+        </footer>
+
+    </div> <!-- 래퍼 끝 -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- ★ 20개국 언어 번역 엔진 ★ -->
     <script>
+        // ★ 화면 자동 맞춤 스크립트 (모바일 완벽 대응 버전) ★
+        function fitScreen() {
+            var wrapper = document.getElementById('scale-wrapper');
+            var windowWidth = window.innerWidth; // 현재 기기의 실제 크기
+            var baseWidth = 1900; // 우리가 만든 홈페이지 원래 크기
+
+            // 1. 화면이 1900px보다 작을 때 (모바일/태블릿/노트북)
+            if (windowWidth < baseWidth) {
+                var scale = windowWidth / baseWidth; // 축소 비율 계산
+                
+                wrapper.style.transform = 'scale(' + scale + ')';
+                wrapper.style.transformOrigin = 'top left'; // 왼쪽 위를 기준으로 축소
+                wrapper.style.width = baseWidth + 'px'; // 내부 크기는 1800 유지
+                
+                // 축소된 만큼 빈 공간이 생기지 않도록 높이 줄이기
+                document.body.style.height = (wrapper.offsetHeight * scale) + 'px';
+                document.body.style.overflowX = 'hidden'; // 가로 스크롤 강제 삭제
+            } 
+            // 2. 화면이 1900px보다 클 때 (초대형 모니터)
+            else {
+                wrapper.style.transform = 'scale(1)';
+                wrapper.style.transformOrigin = 'top center';
+                wrapper.style.width = baseWidth + 'px';
+                wrapper.style.margin = '0 auto';
+                document.body.style.height = 'auto';
+            }
+        }
+
+        window.addEventListener('resize', fitScreen);
+        window.addEventListener('DOMContentLoaded', fitScreen);
+
+        // --- 번역 데이터 (기존과 동일) ---
         const translations = {
             'ko': {
                 langName: '한국어', badge: '✨ 현대해상 제휴 서비스',
@@ -484,20 +479,13 @@
             document.getElementById('card3-desc').innerHTML = data.card3Desc;
             document.getElementById('link-go3').innerHTML = data.linkGo3 + ' <i class="bi bi-arrow-right"></i>';
 
-            // 하단 정보는 영어나 현지 문자가 섞여있으므로 공통값(영어 or 기본값)으로 처리하되
-            // translations 객체에 해당 키가 있으면 그걸 쓰고, 없으면 영어를 씁니다.
-            // 위 20개 언어 데이터에는 하단 번역 키(ftMenu1 등)를 한국어, 영어, 베트남어, 필리핀어만 넣어두었고
-            // 나머지는 영어(기본값)로 나오게 처리하여 코드가 너무 길어지는 것을 방지했습니다.
-            // 필요시 각 언어별로 하단 번역을 추가하면 됩니다.
-            
+            // 하단 정보 업데이트
             const ftData = (data.ftMenu1) ? data : translations['en']; 
-            
             document.getElementById('ft-menu-1').innerText = ftData.ftMenu1;
             document.getElementById('ft-menu-2').innerText = ftData.ftMenu2;
             document.getElementById('ft-menu-3').innerText = ftData.ftMenu3;
             document.getElementById('ft-menu-4').innerText = ftData.ftMenu4;
             document.getElementById('ft-menu-5').innerText = ftData.ftMenu5;
-
             document.getElementById('ft-company-name').innerText = ftData.ftCompanyName;
             document.getElementById('ft-line-1').innerHTML = ftData.ftLine1;
             document.getElementById('ft-line-2').innerHTML = ftData.ftLine2;
