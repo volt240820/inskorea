@@ -56,7 +56,19 @@
             position: absolute; width: 120%; right: 10%; top: 0; opacity: 0.8;
         }
         .mobile-img-box img.char {
-            position: absolute; width: 50%; right: 20%; top: 10px; z-index: 1;
+            position: absolute; width: 50%; right: 25%; top: 10px; z-index: 1;
+        }
+
+        /* 화면이 768px보다 작을 때(모바일)만 적용되는 글자 크기 */
+        @media (max-width: 768px) {
+          /* 제목 크기 */
+           h1.fw-bold {
+           font-size: 26px !important; /* 모바일 제목 크기 */
+            }
+            /* 설명 크기 */
+            #hero-desc {
+            font-size: 14px !important; /* 모바일 설명 크기 */
+            }
         }
 
         .highlight-text { color: #FF9F43; font-weight: 500; }
@@ -368,6 +380,7 @@
     </script>
 </body>
 </html>
+
 
 
 
