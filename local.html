@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280"> <!-- PC 화면 고정 -->
+    <title>지방자치단체 로그인 - 인스코리아</title>
+    
+    <!-- 디자인(부트스트랩) 및 폰트 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f7fdf0; /* 연한 연두색 배경 */
+            height: 100vh; /* 화면 전체 높이 사용 */
+            display: flex;
+            align-items: center; /* 세로 중앙 정렬 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            margin: 0;
+            overflow: hidden; /* 스크롤 없애기 */
+            position: relative;
+        }
+
+        /* 중앙 로그인 박스 */
+        .login-box {
+            background: white;
+            width: 500px;
+            padding: 50px 40px;
+            border: 1px solid #0064FF; /* 파란색 테두리 */
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            z-index: 10; /* 배경보다 위에 뜨게 */
+        }
+
+        .form-select, .form-control {
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+
+        /* 파란색 버튼 */
+        .btn-blue {
+            background-color: #0064FF;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .btn-blue:hover { background-color: #0050cc; color: white; }
+
+        /* 흰색 버튼 (홈으로) */
+        .btn-outline {
+            background-color: white;
+            color: #0064FF;
+            border: 1px solid #0064FF;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-outline:hover { background-color: #f0f7ff; }
+
+        /* 배경 장식 (구름, 농장 그림 등) */
+        .bg-deco {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none; /* 클릭 안 되게 */
+            opacity: 0.6;
+        }
+        .cloud-deco {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 200px;
+            opacity: 0.2;
+        }
+        .cloud-deco-2 {
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            width: 150px;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 배경 구름 장식 (이미지 없을 때를 대비해 투명도로 느낌만 냄) -->
+    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" class="cloud-deco" alt="구름">
+    <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" class="cloud-deco-2" alt="구름">
+
+    <!-- 중앙 로그인 박스 -->
+    <div class="login-box">
+        <h4 class="fw-bold mb-5" style="color: #0064FF;">외국인 계절근로자 지방자치단체</h4>
+        
+        <!-- 입력 폼 -->
+        <div class="text-start">
+            <select class="form-select">
+                <option selected>행정구역</option>
+                <option>경기도</option>
+                <option>강원도</option>
+                <option>충청북도</option>
+                <option>충청남도</option>
+                <option>전라북도</option>
+                <option>전라남도</option>
+                <option>경상북도</option>
+                <option>경상남도</option>
+                <option>제주특별자치도</option>
+            </select>
+
+            <select class="form-select">
+                <option selected>자치단체 선택</option>
+                <option>시/군/구 선택</option>
+            </select>
+
+            <input type="password" class="form-control" placeholder="핀번호 입력">
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-blue" onclick="checkPin()">핀번호 인증</button>
+            <button class="btn btn-outline" onclick="location.href='index.html'">홈으로</button>
+        </div>
+    </div>
+
+    <!-- 하단 농장 배경 이미지 (무료 아이콘으로 비슷한 분위기 연출) -->
+    <div class="bg-deco text-center">
+        <!-- 보내주신 이미지와 비슷한 느낌의 농장 아이콘 배열 -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; padding: 0 50px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2043/2043962.png" width="80" style="opacity: 0.5;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2830/2830303.png" width="100" style="opacity: 0.5;">
+            <div style="border-bottom: 3px solid #cbd5e1; width: 100%; position: absolute; bottom: 10px; z-index: -1;"></div>
+            <img src="https://cdn-icons-png.flaticon.com/512/7604/7604207.png" width="100" style="opacity: 0.5;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2666/2666505.png" width="80" style="opacity: 0.5;">
+        </div>
+    </div>
+
+    <script>
+        function checkPin() {
+            // 실제 인증은 안 되니까 알림창만 띄움
+            alert("🔒 인증에 성공하였습니다.\n관리자 페이지로 이동합니다.");
+        }
+    </script>
+</body>
+</html>
