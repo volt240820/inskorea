@@ -99,6 +99,17 @@
             .custom-card h5 { font-size: 15px !important; font-weight: 800; margin-bottom: 5px; }
             .custom-card p { font-size: 11px !important; line-height: 1.3; margin-bottom: 10px; color: #888; }
             .custom-card a { font-size: 12px !important; }
+            /* 7. 카드 섹션 아래쪽 여백 없애기 */
+            section.py-5 {
+                padding-bottom: 0 !important;
+            }
+
+            /* 8. 푸터(회사정보) 위쪽 여백 확 줄이기 */
+            footer.mt-5 {
+                margin-top: 0 !important; /* 바깥 여백 제거 */
+                padding-top: 20px !important; /* 안쪽 여백 축소 */
+                border-top: none !important; /* (선택사항) 경계선이 겹치면 제거 */
+            }
         }
 
         /* ★ PC 전용 (992px 이상) ★ */
@@ -418,6 +429,7 @@
     </script>
 </body>
 </html>
+
 
 
 
