@@ -294,23 +294,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // ★ 화면 크기 자동 조절 (PC/모바일 완벽 대응)
         function fitContent() {
             var wrapper = document.getElementById('scale-wrapper');
             var windowWidth = window.innerWidth;
             var baseWidth = 1900;
 
             if (windowWidth < 992) {
+                // 모바일
                 wrapper.style.transform = 'none';
                 wrapper.style.width = '100%';
                 wrapper.style.height = 'auto';
                 document.body.style.height = 'auto';
             } else if (windowWidth < baseWidth) {
+                // PC 창 줄임
                 var scale = windowWidth / baseWidth;
                 wrapper.style.transform = 'scale(' + scale + ')';
                 wrapper.style.transformOrigin = 'top center';
                 wrapper.style.width = baseWidth + 'px';
                 document.body.style.height = (wrapper.offsetHeight * scale) + 'px';
             } else {
+                // 대형 화면
                 wrapper.style.transform = 'scale(1)';
                 wrapper.style.transformOrigin = 'top center';
                 wrapper.style.width = baseWidth + 'px';
@@ -322,23 +326,23 @@
         window.addEventListener('resize', fitContent);
         window.addEventListener('DOMContentLoaded', fitContent);
 
-        // --- 번역 데이터 (20개국어 + 카드 5개) ---
+        // ★ 20개국 언어 완벽 번역 데이터 (카드2, 하단정보 포함) ★
         const translations = {
             'ko': {
                 langName: '한국어', badge: '✨ 현대해상 제휴 서비스',
                 titleMain: '외국인 계절근로자', titleSub: '전용 상해보험',
                 desc: '복잡한 서류 없이 여권 촬영 한 번으로!<br>지자체와 근로자 모두를 위한 가장 안전한 선택입니다.',
                 btnConsult: '상담 신청하기', btnDetail: '자세히 보기',
-                card1Title: '지방자치단체 가입', card1Desc: '지자체 담당자 전용 페이지', linkGo: '바로가기',
-                card2Title: '공공형 가입', card2Desc: '공공형 계절근로자 보험 가입', linkGo2: '바로가기',
-                card3Title: '가입 조회', card3Desc: '보험 가입 내역 즉시 확인', linkGo3: '조회하기',
-                card4Title: '청구하기', card4Desc: '보험금 청구 및 구비서류 안내', linkGo4: '청구하기',
-                card5Title: '근로자 개인 가입', card5Desc: '개별 근로자 보험 가입', linkGo5: '가입하기',
-                ftMenu1: '금융소비자보호법 고지', ftMenu2: '개인정보처리방침', ftMenu3: '이용약관', ftMenu4: 'FAQ',
-                ftCompanyName: '인스코리아', ftLine1: '<span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리',
+                card1Title: '지방자치단체 가입', card1Desc: '지자체 담당자를 위한 전용 페이지입니다.', linkGo: '바로가기',
+                card2Title: '근로자개인 가입', card2Desc: '개별 근로자 보험료 확인 및 가입', linkGo2: '가입하기',
+                card3Title: '가입 조회', card3Desc: '보험 가입 내역 및 증명서 발급', linkGo3: '조회하기',
+                card4Title: '청구하기', card4Desc: '보험금 청구 및 심사 조회', linkGo4: '청구하기',
+                ftMenu1: '금융소비자보호법 고지', ftMenu2: '개인정보처리방침', ftMenu3: '이용약관', ftMenu4: '단체규약', ftMenu5: 'FAQ',
+                ftCompanyName: '인스코리아', 
+                ftLine1: '<span class="fw-bold">상호명 :</span> 인스코리아 <span class="mx-2">|</span> <span class="fw-bold">대표 :</span> 서유리',
                 ftLine2: '사업자번호 : 780-22-02367 <span class="mx-2">|</span> 손해보험협회등록번호 : 제2025110022호',
                 ftLine3: '<span class="fw-bold">고객상담 : 010 7546 5568</span> (평일 9:00~17:30)',
-                ftAddr: '<span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10'
+                ftAddr: '<span class="fw-bold">주소 :</span> 서울특별시 강남구 테헤란로88길 10, 신안메트로칸 1212호'
             },
             'en': {
                 langName: 'English', badge: '✨ Hyundai Marine Partnership',
@@ -346,31 +350,31 @@
                 desc: 'Simple sign-up with just a passport photo!<br>No complex documents required.',
                 btnConsult: 'Consultation', btnDetail: 'Details',
                 card1Title: 'Local Gov Sign-up', card1Desc: 'For local government officials', linkGo: 'Go to Page',
-                card2Title: 'Public Sign-up', card2Desc: 'Public seasonal worker insurance', linkGo2: 'Go to Page',
-                card3Title: 'Check Status', card3Desc: 'Check your insurance status', linkGo3: 'Check Now',
-                card4Title: 'Claim', card4Desc: 'Insurance claim guidance', linkGo4: 'Claim',
-                card5Title: 'Individual Sign-up', card5Desc: 'For individual workers', linkGo5: 'Sign-up',
-                ftMenu1: 'Consumer Protection', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'FAQ',
-                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Company :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                card2Title: 'Individual Sign-up', card2Desc: 'Check premium & sign up', linkGo2: 'Sign Up',
+                card3Title: 'Check Status', card3Desc: 'Check insurance & certificates', linkGo3: 'Check Now',
+                card4Title: 'Claim', card4Desc: 'File a claim & check status', linkGo4: 'Claim',
+                ftMenu1: 'Consumer Protection', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'Regulations', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Company :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
                 ftLine2: 'Business Reg. No : 780-22-02367 <span class="mx-2">|</span> Ins. Assoc. Reg. No : 2025110022',
-                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span>',
-                ftAddr: '<span class="fw-bold">Address :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span> (Weekdays 9:00~17:30)',
+                ftAddr: '<span class="fw-bold">Address :</span> #1212, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             },
             'vn': {
-                langName: 'Tiếng Việt', badge: '✨ Đối tác bảo hiểm Hyundai',
+                langName: 'Tiếng Việt', badge: '✨ Đối tác Hyundai Marine',
                 titleMain: 'Bảo hiểm tai nạn', titleSub: 'Lao động thời vụ',
                 desc: 'Đăng ký đơn giản chỉ với ảnh hộ chiếu!<br>Không cần giấy tờ phức tạp.',
                 btnConsult: 'Tư vấn', btnDetail: 'Chi tiết',
                 card1Title: 'Chính quyền địa phương', card1Desc: 'Dành cho cán bộ địa phương', linkGo: 'Đi đến trang',
-                card2Title: 'Đăng ký công khai', card2Desc: 'Bảo hiểm lao động công cộng', linkGo2: 'Đi đến trang',
+                card2Title: 'Đăng ký cá nhân', card2Desc: 'Kiểm tra phí & đăng ký', linkGo2: 'Đăng ký',
                 card3Title: 'Tra cứu đăng ký', card3Desc: 'Kiểm tra trạng thái bảo hiểm', linkGo3: 'Kiểm tra',
-                card4Title: 'Yêu cầu bồi thường', card4Desc: 'Hướng dẫn bồi thường bảo hiểm', linkGo4: 'Yêu cầu',
-                card5Title: 'Đăng ký cá nhân', card5Desc: 'Dành cho người lao động cá nhân', linkGo5: 'Đăng ký',
-                ftMenu1: 'Bảo vệ người tiêu dùng', ftMenu2: 'Chính sách bảo mật', ftMenu3: 'Điều khoản', ftMenu4: 'FAQ',
-                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Công ty :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Đại diện :</span> Seo Yuri',
+                card4Title: 'Yêu cầu bồi thường', card4Desc: 'Nộp hồ sơ bồi thường', linkGo4: 'Yêu cầu',
+                ftMenu1: 'Bảo vệ người tiêu dùng', ftMenu2: 'Chính sách bảo mật', ftMenu3: 'Điều khoản', ftMenu4: 'Quy định', ftMenu5: 'FAQ',
+                ftCompanyName: 'Công ty TNHH INSKOREA', 
+                ftLine1: '<span class="fw-bold">Công ty :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Giám đốc :</span> Seo Yuri',
                 ftLine2: 'ĐKKD : 780-22-02367 <span class="mx-2">|</span> Hiệp hội BH : 2025110022',
-                ftLine3: '<span class="fw-bold">CSKH : 010 7546 5568</span>',
-                ftAddr: '<span class="fw-bold">Địa chỉ :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                ftLine3: '<span class="fw-bold">CSKH : 010 7546 5568</span> (Ngày thường 9:00~17:30)',
+                ftAddr: '<span class="fw-bold">Địa chỉ :</span> #1212, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             },
             'ph': {
                 langName: 'Filipino', badge: '✨ Partner ng Hyundai Marine',
@@ -378,85 +382,278 @@
                 desc: 'Mag-sign up gamit ang pasaporte lang!<br>Walang kumplikadong dokumento.',
                 btnConsult: 'Konsultasyon', btnDetail: 'Detalye',
                 card1Title: 'Lokal na Pamahalaan', card1Desc: 'Para sa mga opisyal', linkGo: 'Pumunta',
-                card2Title: 'Pampublikong Sign-up', card2Desc: 'Seguro para sa manggagawa', linkGo2: 'Pumunta',
+                card2Title: 'Indibidwal na Sign-up', card2Desc: 'Suriin ang premium at sumali', linkGo2: 'Mag-sign up',
                 card3Title: 'Suriin ang Katayuan', card3Desc: 'Suriin ang status ng seguro', linkGo3: 'Suriin',
-                card4Title: 'Claim', card4Desc: 'Gabay sa pag-claim ng seguro', linkGo4: 'Claim',
-                card5Title: 'Indibidwal na Pag-sign-up', card5Desc: 'Para sa mga indibidwal na manggagawa', linkGo5: 'Mag-sign up',
-                ftMenu1: 'Proteksyon ng Mamimili', ftMenu2: 'Privacy Policy', ftMenu3: 'Terms', ftMenu4: 'FAQ',
-                ftCompanyName: 'INSKOREA', ftLine1: '<span class="fw-bold">Kompanya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Kinatawan :</span> Seo Yuri',
+                card4Title: 'Claim', card4Desc: 'Maghain ng claim', linkGo4: 'Claim',
+                ftMenu1: 'Proteksyon ng Mamimili', ftMenu2: 'Patakaran sa Privacy', ftMenu3: 'Mga Tuntunin', ftMenu4: 'Regulasyon', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA Co., Ltd.', 
+                ftLine1: '<span class="fw-bold">Kompanya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Kinatawan :</span> Seo Yuri',
                 ftLine2: 'Negosyo Blg : 780-22-02367 <span class="mx-2">|</span> Asosasyon ng Seguro : 2025110022',
                 ftLine3: '<span class="fw-bold">Customer Center : 010 7546 5568</span>',
-                ftAddr: '<span class="fw-bold">Address :</span> 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
+                ftAddr: '<span class="fw-bold">Address :</span> #1212, 10 Teheran-ro 88-gil, Gangnam-gu, Seoul'
             },
-            'lo': { langName: 'ພາສາລາວ', badge: '✨ Hyundai Marine', titleMain: 'ປະກັນໄພ', titleSub: 'ແຮງງານຕາມລະດູການ', desc: 'ສະໝັກງ່າຍໆ!', btnConsult: 'ປຶກສາ', btnDetail: 'ລາຍລະອຽດ', card1Title: 'ລັດຖະບານທ້ອງຖິ່ນ', card1Desc: 'ເຈົ້າຫນ້າທີ່', linkGo: 'ໄປ', card2Title: 'ບຸກຄົນ', card2Desc: 'ກວດເບິ່ງ', linkGo2: 'ໄປ', card3Title: 'ກວດສອບ', card3Desc: 'ສະຖານະ', linkGo3: 'ກວດສອບ', card4Title: 'ຮຽກຮ້ອງ', card4Desc: 'ຮຽກຮ້ອງສິນໄໝ', linkGo4: 'ຮຽກຮ້ອງ', ftCompanyName: 'INSKOREA' },
-            'km': { langName: 'ភាសាខ្មែរ', badge: '✨ Hyundai Marine', titleMain: 'ធានារ៉ាប់រង', titleSub: 'ពលករតាមរដូវ', desc: 'ចុះឈ្មោះងាយស្រួល!', btnConsult: 'ពិគ្រោះ', btnDetail: 'លម្អិត', card1Title: 'រដ្ឋាភិបាល', card1Desc: 'មន្ត្រី', linkGo: 'ទៅ', card2Title: 'បុគ្គល', card2Desc: 'ពិនិត្យ', linkGo2: 'ទៅ', card3Title: 'ពិនិត្យ', card3Desc: 'ស្ថានភាព', linkGo3: 'ពិនិត្យ', card4Title: 'ទាមទារ', card4Desc: 'សំណង', linkGo4: 'ទាមទារ', ftCompanyName: 'INSKOREA' },
-            'mn': { langName: 'Монгол', badge: '✨ Hyundai Marine', titleMain: 'Даатгал', titleSub: 'Улирлын ажилчид', desc: 'Хялбар бүртгэл!', btnConsult: 'Зөвлөгөө', btnDetail: 'Дэлгэрэнгүй', card1Title: 'Орон нутаг', card1Desc: 'Албан хаагчид', linkGo: 'Очих', card2Title: 'Хувь хүн', card2Desc: 'Шалгах', linkGo2: 'Очих', card3Title: 'Шалгах', card3Desc: 'Төлөв', linkGo3: 'Шалгах', card4Title: 'Нэхэмжлэл', card4Desc: 'Нөхөн төлбөр', linkGo4: 'Нэхэмжлэх', ftCompanyName: 'INSKOREA' },
-            'ru': { langName: 'Русский', badge: '✨ Hyundai Marine', titleMain: 'Страхование', titleSub: 'Сезонные рабочие', desc: 'Простая регистрация!', btnConsult: 'Консультация', btnDetail: 'Детали', card1Title: 'Местная власть', card1Desc: 'Для чиновников', linkGo: 'Перейти', card2Title: 'Личная', card2Desc: 'Проверить взнос', linkGo2: 'Перейти', card3Title: 'Статус', card3Desc: 'Проверить', linkGo3: 'Проверить', card4Title: 'Заявка', card4Desc: 'Выплата', linkGo4: 'Подать', ftCompanyName: 'INSKOREA' },
-            'uz': { langName: 'O\'zbek', badge: '✨ Hyundai Marine', titleMain: 'Sug\'urta', titleSub: 'Mavsumiy ishchilar', desc: 'Oson ro\'yxatdan o\'tish!', btnConsult: 'Maslahat', btnDetail: 'Batafsil', card1Title: 'Mahalliy hokimiyat', card1Desc: 'Rasmiylar uchun', linkGo: 'O\'tish', card2Title: 'Shaxsiy', card2Desc: 'Tekshirish', linkGo2: 'O\'tish', card3Title: 'Tekshirish', card3Desc: 'Holat', linkGo3: 'Tekshirish', card4Title: 'Da\'vo', card4Desc: 'To\'lov', linkGo4: 'Da\'vo qilish', ftCompanyName: 'INSKOREA' },
-            'id': { langName: 'Indonesia', badge: '✨ Hyundai Marine', titleMain: 'Asuransi', titleSub: 'Pekerja Musiman', desc: 'Daftar mudah!', btnConsult: 'Konsultasi', btnDetail: 'Detail', card1Title: 'Pemerintah Lokal', card1Desc: 'Pejabat', linkGo: 'Buka', card2Title: 'Individu', card2Desc: 'Cek premi', linkGo2: 'Buka', card3Title: 'Cek Status', card3Desc: 'Status', linkGo3: 'Cek', card4Title: 'Klaim', card4Desc: 'Ajukan klaim', linkGo4: 'Klaim', ftCompanyName: 'INSKOREA' },
-            'cn': { langName: '简体中文', badge: '✨ 现代海上', titleMain: '保险', titleSub: '季节性劳工', desc: '简单注册！', btnConsult: '咨询', btnDetail: '详情', card1Title: '地方政府', card1Desc: '官员专用', linkGo: '前往', card2Title: '个人加入', card2Desc: '确认保费', linkGo2: '前往', card3Title: '查询', card3Desc: '状态', linkGo3: '查询', card4Title: '理赔', card4Desc: '申请理赔', linkGo4: '申请', ftCompanyName: 'INSKOREA' },
-            'tw': { langName: '繁體中文', badge: '✨ 現代海上', titleMain: '保險', titleSub: '季節性勞工', desc: '簡單註冊！', btnConsult: '諮詢', btnDetail: '詳情', card1Title: '地方政府', card1Desc: '官員專用', linkGo: '前往', card2Title: '個人加入', card2Desc: '確認保費', linkGo2: '前往', card3Title: '查詢', card3Desc: '狀態', linkGo3: '查詢', card4Title: '理賠', card4Desc: '申請理賠', linkGo4: '申請', ftCompanyName: 'INSKOREA' },
-            'kg': { langName: 'Кыргызча', badge: '✨ Hyundai Marine', titleMain: 'Камсыздандыруу', titleSub: 'Мезгилдүү жумушчулар', desc: 'Оңой каттоо!', btnConsult: 'Кеңеш', btnDetail: 'Толук', card1Title: 'Жергиликтүү бийлик', card1Desc: 'Расмийлер үчүн', linkGo: 'Өтүү', card2Title: 'Жеке', card2Desc: 'Текшерүү', linkGo2: 'Өтүү', card3Title: 'Текшерүү', card3Desc: 'Статус', linkGo3: 'Текшерүү', card4Title: 'Доомат', card4Desc: 'Төлөм', linkGo4: 'Доомат', ftCompanyName: 'INSKOREA' },
-            'th': { langName: 'แบบไทย', badge: '✨ Hyundai Marine', titleMain: 'ประกันภัย', titleSub: 'แรงงานตามฤดูกาล', desc: 'สมัครง่าย!', btnConsult: 'ปรึกษา', btnDetail: 'รายละเอียด', card1Title: 'รัฐบาลท้องถิ่น', card1Desc: 'สำหรับเจ้าหน้าที่', linkGo: 'ไป', card2Title: 'บุคคล', card2Desc: 'เช็คเบี้ย', linkGo2: 'ไป', card3Title: 'ตรวจสอบ', card3Desc: 'สถานะ', linkGo3: 'ตรวจสอบ', card4Title: 'เคลม', card4Desc: 'ยื่นเคลม', linkGo4: 'เคลม', ftCompanyName: 'INSKOREA' },
-            'mm': { langName: 'မြန်မာ', badge: '✨ Hyundai Marine', titleMain: 'အာမခံ', titleSub: 'ရာသီချိန်လုပ်သား', desc: 'လွယ်ကူသောစာရင်းသွင်းမှု!', btnConsult: 'ဆွေးနွေး', btnDetail: 'အသေးစိတ်', card1Title: 'ဒေသန္တရအစိုးရ', card1Desc: 'အရာရှိများ', linkGo: 'သွား', card2Title: 'တစ်ဦးချင်း', card2Desc: 'စစ်ဆေး', linkGo2: 'သွား', card3Title: 'စစ်ဆေး', card3Desc: 'အခြေအနေ', linkGo3: 'စစ်ဆေး', card4Title: 'တောင်းဆို', card4Desc: 'လျော်ကြေး', linkGo4: 'တောင်းဆို', ftCompanyName: 'INSKOREA' },
-            'bn': { langName: 'বাংলা', badge: '✨ Hyundai Marine', titleMain: 'বীমা', titleSub: 'মৌসুমী কর্মী', desc: 'সহজ সাইন আপ!', btnConsult: 'পরামর্শ', btnDetail: 'বিস্তারিত', card1Title: 'স্থানীয় সরকার', card1Desc: 'কর্মকর্তাদের জন্য', linkGo: 'যান', card2Title: 'ব্যক্তিগত', card2Desc: 'চেক', linkGo2: 'যান', card3Title: 'চেক', card3Desc: 'স্ট্যাটাস', linkGo3: 'চেক', card4Title: 'দাবি', card4Desc: 'দাবি পেশ', linkGo4: 'দাবি', ftCompanyName: 'INSKOREA' },
-            'si': { langName: 'සිංහල', badge: '✨ Hyundai Marine', titleMain: 'රක්ෂණය', titleSub: 'සෘතුමය සේවක', desc: 'පහසු ලියාපදිංචිය!', btnConsult: 'උපදේශනය', btnDetail: 'විස්තර', card1Title: 'පළාත් පාලන', card1Desc: 'නිලධාරීන්', linkGo: 'යන්න', card2Title: 'තනි පුද්ගල', card2Desc: 'පරීක්ෂා', linkGo2: 'යන්න', card3Title: 'පරීක්ෂා', card3Desc: 'තත්ත්වය', linkGo3: 'පරීක්ෂා', card4Title: 'හිමිකම්', card4Desc: 'ඉල්ලුම්', linkGo4: 'හිමිකම්', ftCompanyName: 'INSKOREA' },
-            'ta': { langName: 'தமிழ்', badge: '✨ Hyundai Marine', titleMain: 'காப்பீடு', titleSub: 'பருவகால ஊழியர்', desc: 'எளிதான பதிவு!', btnConsult: 'ஆலோசனை', btnDetail: 'விவரம்', card1Title: 'உள்ளூர் அரசு', card1Desc: 'அதிகாரிகளுக்கு', linkGo: 'செல்க', card2Title: 'தனிநபர்', card2Desc: 'சரிபார்', linkGo2: 'செல்க', card3Title: 'சரிபார்', card3Desc: 'நிலை', linkGo3: 'சரிபார்', card4Title: 'கோரிக்கை', card4Desc: 'வழங்கு', linkGo4: 'கோரிக்கை', ftCompanyName: 'INSKOREA' },
-            'ur': { langName: 'اردو', badge: '✨ Hyundai Marine', titleMain: 'انشورنس', titleSub: 'موسمی کارکن', desc: 'آسان سائن اپ!', btnConsult: 'مشورہ', btnDetail: 'تفصیلات', card1Title: 'مقامی حکومت', card1Desc: 'عہدیداروں کیلئے', linkGo: 'جائیں', card2Title: 'انفرادی', card2Desc: 'چیک کریں', linkGo2: 'جائیں', card3Title: 'چیک کریں', card3Desc: 'حیثیت', linkGo3: 'چیک کریں', card4Title: 'دعویٰ', card4Desc: 'جمع کرائیں', linkGo4: 'دعویٰ', ftCompanyName: 'INSKOREA' },
-            'fa': { langName: 'فارسی', badge: '✨ Hyundai Marine', titleMain: 'بیمه', titleSub: 'کارگران فصلی', desc: 'ثبت نام آسان!', btnConsult: 'مشاوره', btnDetail: 'جزئیات', card1Title: 'دولت محلی', card1Desc: 'مسئولین', linkGo: 'برو', card2Title: 'انفرادی', card2Desc: 'بررسی', linkGo2: 'برو', card3Title: 'بررسی', card3Desc: 'وضعیت', linkGo3: 'بررسی', card4Title: 'ادعا', card4Desc: 'ثبت', linkGo4: 'ادعا', ftCompanyName: 'INSKOREA' }
-        };
-
-        function changeLang(lang) {
-            const data = translations[lang] || translations['en']; // 해당 언어 없으면 영어로 대체
-
-            document.getElementById('current-lang').innerText = data.langName;
-            document.getElementById('badge-text').innerText = data.badge;
-            document.getElementById('title-main').innerText = data.titleMain;
-            document.getElementById('title-sub').innerText = data.titleSub;
-            document.getElementById('hero-desc').innerHTML = data.desc;
-            document.getElementById('btn-consult').innerText = data.btnConsult;
-            document.getElementById('btn-detail').innerText = data.btnDetail;
-            
-            // 카드 1 (지방자치)
-            document.getElementById('card1-title').innerText = data.card1Title;
-            document.getElementById('card1-desc').innerText = data.card1Desc;
-            document.getElementById('link-go').innerHTML = data.linkGo + ' <i class="bi bi-arrow-right"></i>';
-            
-            // 카드 2 (개인 가입)
-            document.getElementById('card2-title').innerText = data.card2Title;
-            document.getElementById('card2-desc').innerText = data.card2Desc;
-            document.getElementById('link-go2').innerHTML = data.linkGo2 + ' <i class="bi bi-arrow-right"></i>';
-            
-            // 카드 3 (조회)
-            document.getElementById('card3-title').innerText = data.card3Title;
-            document.getElementById('card3-desc').innerText = data.card3Desc;
-            document.getElementById('link-go3').innerHTML = data.linkGo3 + ' <i class="bi bi-arrow-right"></i>';
-
-            // 카드 4 (청구 - 새로 추가됨)
-            document.getElementById('card4-title').innerText = data.card4Title;
-            document.getElementById('card4-desc').innerText = data.card4Desc;
-            document.getElementById('link-go4').innerHTML = data.linkGo4 + ' <i class="bi bi-arrow-right"></i>';
-            
-            // 하단 정보 (영어/현지어 병기 등)
-            const ftData = (data.ftMenu1) ? data : translations['en']; 
-            document.getElementById('ft-menu-1').innerText = ftData.ftMenu1;
-            document.getElementById('ft-menu-2').innerText = ftData.ftMenu2;
-            document.getElementById('ft-menu-3').innerText = ftData.ftMenu3;
-            document.getElementById('ft-menu-4').innerText = ftData.ftMenu4;
-            document.getElementById('ft-menu-5').innerText = ftData.ftMenu5;
-            document.getElementById('ft-company-name').innerText = ftData.ftCompanyName;
-            document.getElementById('ft-line-1').innerHTML = ftData.ftLine1;
-            document.getElementById('ft-line-2').innerHTML = ftData.ftLine2;
-            document.getElementById('ft-line-3').innerHTML = ftData.ftLine3;
-            document.getElementById('ft-addr').innerHTML = ftData.ftAddr;
-        }
-    </script>
-</body>
-</html>
+            'lo': {
+                langName: 'ພາສາລາວ', badge: '✨ Hyundai Marine',
+                titleMain: 'ປະກັນໄພ', titleSub: 'ແຮງງານຕາມລະດູການ',
+                desc: 'ສະໝັກງ່າຍໆດ້ວຍຮູບຖ່າຍ!',
+                btnConsult: 'ປຶກສາ', btnDetail: 'ລາຍລະອຽດ',
+                card1Title: 'ລັດຖະບານທ້ອງຖິ່ນ', card1Desc: 'ສຳລັບເຈົ້າຫນ້າທີ່', linkGo: 'ໄປ',
+                card2Title: 'ສະໝັກບຸກຄົນ', card2Desc: 'ກວດເບິ່ງຄ່າທຳນຽມ', linkGo2: 'ສະໝັກ',
+                card3Title: 'ກວດສອບ', card3Desc: 'ກວດສອບສະຖານະ', linkGo3: 'ກວດສອບ',
+                card4Title: 'ຮຽກຮ້ອງ', card4Desc: 'ຍື່ນຄໍາຮ້ອງຂໍ', linkGo4: 'ຮຽກຮ້ອງ',
+                ftMenu1: 'ການປົກປ້ອງຜູ້ບໍລິໂພກ', ftMenu2: 'ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ', ftMenu3: 'ເງື່ອນໄຂ', ftMenu4: 'ກົດລະບຽບ', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">ບໍລິສັດ :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'ທະບຽນທຸລະກິດ : 780-22-02367',
+                ftLine3: '<span class="fw-bold">ສູນບໍລິການ : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">ທີ່ຢູ່ :</span> Gangnam-gu, Seoul'
+            },
+            'km': {
+                langName: 'ភាសាខ្មែរ', badge: '✨ Hyundai Marine',
+                titleMain: 'ធានារ៉ាប់រង', titleSub: 'ពលករតាមរដូវ',
+                desc: 'ចុះឈ្មោះងាយស្រួល!',
+                btnConsult: 'ពិគ្រោះ', btnDetail: 'លម្អិត',
+                card1Title: 'រដ្ឋាភិបាល', card1Desc: 'សម្រាប់មន្ត្រី', linkGo: 'ទៅ',
+                card2Title: 'ចុះឈ្មោះបុគ្គល', card2Desc: 'ពិនិត្យមើលបុព្វលាភ', linkGo2: 'ចុះឈ្មោះ',
+                card3Title: 'ពិនិត្យ', card3Desc: 'ស្ថានភាព', linkGo3: 'ពិនិត្យ',
+                card4Title: 'ទាមទារ', card4Desc: 'ដាក់ពាក្យទាមទារ', linkGo4: 'ទាមទារ',
+                ftMenu1: 'កិច្ចការពារអ្នកប្រើប្រាស់', ftMenu2: 'គោលការណ៍​ភាព​ឯកជន', ftMenu3: 'លក្ខខណ្ឌ', ftMenu4: 'បទប្បញ្ញត្តិ', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">ក្រុមហ៊ុន :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'លេខចុះបញ្ជី : 780-22-02367',
+                ftLine3: '<span class="fw-bold">សេវាអតិថិជន : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">អាស័យដ្ឋាន :</span> Gangnam-gu, Seoul'
+            },
+            'mn': {
+                langName: 'Монгол', badge: '✨ Hyundai Marine',
+                titleMain: 'Даатгал', titleSub: 'Улирлын ажилчид',
+                desc: 'Хялбар бүртгэл!',
+                btnConsult: 'Зөвлөгөө', btnDetail: 'Дэлгэрэнгүй',
+                card1Title: 'Орон нутаг', card1Desc: 'Албан хаагчид', linkGo: 'Очих',
+                card2Title: 'Хувь хүн', card2Desc: 'шимтгэл шалгах', linkGo2: 'Бүртгүүлэх',
+                card3Title: 'Шалгах', card3Desc: 'Төлөв шалгах', linkGo3: 'Шалгах',
+                card4Title: 'Нэхэмжлэл', card4Desc: 'Нөхөн төлбөр', linkGo4: 'Нэхэмжлэх',
+                ftMenu1: 'Хэрэглэгчийн хамгаалалт', ftMenu2: 'Нууцлалын бодлого', ftMenu3: 'Нөхцөл', ftMenu4: 'Дүрэм', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Компани :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Захирал :</span> Seo Yuri',
+                ftLine2: 'Регистр : 780-22-02367',
+                ftLine3: '<span class="fw-bold">Холбоо барих : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Хаяг :</span> Gangnam-gu, Seoul'
+            },
+            'ru': {
+                langName: 'Русский', badge: '✨ Hyundai Marine',
+                titleMain: 'Страхование', titleSub: 'Сезонные рабочие',
+                desc: 'Простая регистрация!',
+                btnConsult: 'Консультация', btnDetail: 'Детали',
+                card1Title: 'Местная власть', card1Desc: 'Для чиновников', linkGo: 'Перейти',
+                card2Title: 'Личная', card2Desc: 'Регистрация', linkGo2: 'Войти',
+                card3Title: 'Статус', card3Desc: 'Проверить', linkGo3: 'Проверить',
+                card4Title: 'Заявка', card4Desc: 'Выплата', linkGo4: 'Подать',
+                ftMenu1: 'Защита прав потребителей', ftMenu2: 'Конфиденциальность', ftMenu3: 'Условия', ftMenu4: 'Правила', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Компания :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Директор :</span> Seo Yuri',
+                ftLine2: 'Рег. номер : 780-22-02367',
+                ftLine3: '<span class="fw-bold">Центр поддержки : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Адрес :</span> Gangnam-gu, Seoul'
+            },
+            'uz': {
+                langName: 'O\'zbek', badge: '✨ Hyundai Marine',
+                titleMain: 'Sug\'urta', titleSub: 'Mavsumiy ishchilar',
+                desc: 'Oson ro\'yxatdan o\'tish!',
+                btnConsult: 'Maslahat', btnDetail: 'Batafsil',
+                card1Title: 'Mahalliy hokimiyat', card1Desc: 'Rasmiylar uchun', linkGo: 'O\'tish',
+                card2Title: 'Shaxsiy', card2Desc: 'Ro\'yxatdan o\'tish', linkGo2: 'Kirish',
+                card3Title: 'Tekshirish', card3Desc: 'Holat', linkGo3: 'Tekshirish',
+                card4Title: 'Da\'vo', card4Desc: 'To\'lov', linkGo4: 'Da\'vo',
+                ftMenu1: 'Iste\'molchilar huquqi', ftMenu2: 'Maxfiylik siyosati', ftMenu3: 'Shartlar', ftMenu4: 'Qoidalar', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Kompaniya :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Direktor :</span> Seo Yuri',
+                ftLine2: 'Reg. raqami : 780-22-02367',
+                ftLine3: '<span class="fw-bold">Mijozlar markazi : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Manzil :</span> Gangnam-gu, Seoul'
+            },
+            'id': {
+                langName: 'Indonesia', badge: '✨ Mitra Hyundai',
+                titleMain: 'Asuransi', titleSub: 'Pekerja Musiman',
+                desc: 'Daftar mudah!',
+                btnConsult: 'Konsultasi', btnDetail: 'Detail',
+                card1Title: 'Pemerintah Lokal', card1Desc: 'Untuk Pejabat', linkGo: 'Buka',
+                card2Title: 'Individu', card2Desc: 'Daftar Sendiri', linkGo2: 'Daftar',
+                card3Title: 'Cek Status', card3Desc: 'Cek Asuransi', linkGo3: 'Cek',
+                card4Title: 'Klaim', card4Desc: 'Ajukan klaim', linkGo4: 'Klaim',
+                ftMenu1: 'Perlindungan Konsumen', ftMenu2: 'Kebijakan Privasi', ftMenu3: 'Syarat', ftMenu4: 'Aturan', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Perusahaan :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'No. Reg Bisnis : 780-22-02367',
+                ftLine3: '<span class="fw-bold">Pusat Pelanggan : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Alamat :</span> Gangnam-gu, Seoul'
+            },
+            'cn': {
+                langName: '简体中文', badge: '✨ 现代海上',
+                titleMain: '保险', titleSub: '季节性劳工',
+                desc: '简单注册！',
+                btnConsult: '咨询', btnDetail: '详情',
+                card1Title: '地方政府', card1Desc: '官员专用', linkGo: '前往',
+                card2Title: '个人加入', card2Desc: '确认保费', linkGo2: '加入',
+                card3Title: '查询', card3Desc: '状态', linkGo3: '查询',
+                card4Title: '理赔', card4Desc: '申请理赔', linkGo4: '申请',
+                ftMenu1: '消费者保护', ftMenu2: '隐私政策', ftMenu3: '条款', ftMenu4: '规定', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">公司 :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">代表 :</span> Seo Yuri',
+                ftLine2: '商业登记号 : 780-22-02367',
+                ftLine3: '<span class="fw-bold">客户中心 : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">地址 :</span> Gangnam-gu, Seoul'
+            },
+            'tw': {
+                langName: '繁體中文', badge: '✨ 現代海上',
+                titleMain: '保險', titleSub: '季節性勞工',
+                desc: '簡單註冊！',
+                btnConsult: '諮詢', btnDetail: '詳情',
+                card1Title: '地方政府', card1Desc: '官員專用', linkGo: '前往',
+                card2Title: '個人加入', card2Desc: '確認保費', linkGo2: '加入',
+                card3Title: '查詢', card3Desc: '狀態', linkGo3: '查詢',
+                card4Title: '理賠', card4Desc: '申請理賠', linkGo4: '申請',
+                ftMenu1: '消費者保護', ftMenu2: '隱私政策', ftMenu3: '條款', ftMenu4: '規定', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">公司 :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">代表 :</span> Seo Yuri',
+                ftLine2: '商業登記號 : 780-22-02367',
+                ftLine3: '<span class="fw-bold">客戶中心 : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">地址 :</span> Gangnam-gu, Seoul'
+            },
+            'th': {
+                langName: 'แบบไทย', badge: '✨ Hyundai Marine',
+                titleMain: 'ประกันภัย', titleSub: 'แรงงานฤดูกาล',
+                desc: 'สมัครง่าย!',
+                btnConsult: 'ปรึกษา', btnDetail: 'รายละเอียด',
+                card1Title: 'รัฐบาลท้องถิ่น', card1Desc: 'เจ้าหน้าที่', linkGo: 'ไป',
+                card2Title: 'สมัครบุคคล', card2Desc: 'เช็คเบี้ย', linkGo2: 'สมัคร',
+                card3Title: 'ตรวจสอบ', card3Desc: 'สถานะ', linkGo3: 'เช็ค',
+                card4Title: 'เคลม', card4Desc: 'ยื่นเคลม', linkGo4: 'ยื่น',
+                ftMenu1: 'คุ้มครองผู้บริโภค', ftMenu2: 'นโยบายความเป็นส่วนตัว', ftMenu3: 'เงื่อนไข', ftMenu4: 'กฎระเบียบ', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">บริษัท :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'เลขทะเบียน : 780-22-02367',
+                ftLine3: '<span class="fw-bold">ศูนย์ลูกค้า : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">ที่อยู่ :</span> Gangnam-gu, Seoul'
+            },
+            'kg': {
+                langName: 'Кыргызча', badge: '✨ Hyundai Marine',
+                titleMain: 'Камсыздандыруу', titleSub: 'Мезгилдүү жумушчулар',
+                desc: 'Оңой каттоо!',
+                btnConsult: 'Кеңеш', btnDetail: 'Толук',
+                card1Title: 'Жергиликтүү бийлик', card1Desc: 'Расмийлер', linkGo: 'Өтүү',
+                card2Title: 'Жеке', card2Desc: 'Каттоо', linkGo2: 'Кирүү',
+                card3Title: 'Текшерүү', card3Desc: 'Статус', linkGo3: 'Текшерүү',
+                card4Title: 'Доомат', card4Desc: 'Төлөм', linkGo4: 'Доомат',
+                ftMenu1: 'Керектөөчүлөрдү коргоо', ftMenu2: 'Купуялык', ftMenu3: 'Шарттар', ftMenu4: 'Эрежелер', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">Компания :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">Директор :</span> Seo Yuri',
+                ftLine2: 'Рег. номер : 780-22-02367',
+                ftLine3: '<span class="fw-bold">Байланыш : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">Дарек :</span> Gangnam-gu, Seoul'
+            },
+            'mm': {
+                langName: 'မြန်မာ', badge: '✨ Hyundai Marine',
+                titleMain: 'အာမခံ', titleSub: 'ရာသီချိန်လုပ်သား',
+                desc: 'လွယ်ကူသော!',
+                btnConsult: 'ဆွေးနွေး', btnDetail: 'အသေးစိတ်',
+                card1Title: 'အစိုးရ', card1Desc: 'အရာရှိ', linkGo: 'သွား',
+                card2Title: 'တစ်ဦးချင်း', card2Desc: 'စာရင်းသွင်း', linkGo2: 'ဝင်ရန်',
+                card3Title: 'စစ်ဆေး', card3Desc: 'အခြေအနေ', linkGo3: 'စစ်ဆေး',
+                card4Title: 'တောင်းဆို', card4Desc: 'လျော်ကြေး', linkGo4: 'တောင်းဆို',
+                ftMenu1: 'စားသုံးသူကာကွယ်ရေး', ftMenu2: 'ကိုယ်ရေးအချက်အလက်', ftMenu3: 'စည်းကမ်း', ftMenu4: 'စည်းမျဉ်း', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">ကုမ္ပဏီ :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'မှတ်ပုံတင် : 780-22-02367',
+                ftLine3: '<span class="fw-bold">ဖုန်း : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">လိပ်စာ :</span> Gangnam-gu, Seoul'
+            },
+            'bn': {
+                langName: 'বাংলা', badge: '✨ হুন্ডাই মেরিন',
+                titleMain: 'বীমা', titleSub: 'মৌসুমী কর্মী',
+                desc: 'সহজ সাইন আপ!',
+                btnConsult: 'পরামর্শ', btnDetail: 'বিস্তারিত',
+                card1Title: 'সরকার', card1Desc: 'কর্মকর্তাদের', linkGo: 'যান',
+                card2Title: 'ব্যক্তিগত', card2Desc: 'সাইন আপ', linkGo2: 'যান',
+                card3Title: 'চেক', card3Desc: 'স্ট্যাটাস', linkGo3: 'চেক',
+                card4Title: 'দাবি', card4Desc: 'পেশ করুন', linkGo4: 'দাবি',
+                ftMenu1: 'ভোক্তা সুরক্ষা', ftMenu2: 'গোপনীয়তা', ftMenu3: 'শর্তাবলী', ftMenu4: 'বিধি', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">কোম্পানি :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">সিইও :</span> Seo Yuri',
+                ftLine2: 'রেজি নং : 780-22-02367',
+                ftLine3: '<span class="fw-bold">সেন্টার : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">ঠিকানা :</span> Gangnam-gu, Seoul'
+            },
+            'si': {
+                langName: 'සිංහල', badge: '✨ Hyundai Marine',
+                titleMain: 'රක්ෂණය', titleSub: 'සෘතුමය සේවක',
+                desc: 'පහසුයි!',
+                btnConsult: 'උපදේශනය', btnDetail: 'විස්තර',
+                card1Title: 'ආණ්ඩුව', card1Desc: 'නිලධාරීන්', linkGo: 'යන්න',
+                card2Title: 'පුද්ගලික', card2Desc: 'ලියාපදිංචි', linkGo2: 'යන්න',
+                card3Title: 'පරීක්ෂා', card3Desc: 'තත්ත්වය', linkGo3: 'පරීක්ෂා',
+                card4Title: 'හිමිකම්', card4Desc: 'ඉල්ලුම්', linkGo4: 'හිමිකම්',
+                ftMenu1: 'පාරිභෝගික ආරක්ෂාව', ftMenu2: 'ප්‍රතිපත්තිය', ftMenu3: 'කොන්දේසි', ftMenu4: 'රෙගුලාසි', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">සමාගම :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'ලියාපදිංචි අංකය : 780-22-02367',
+                ftLine3: '<span class="fw-bold">ඇමතුම් : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">ලිපිනය :</span> Gangnam-gu, Seoul'
+            },
+            'ta': {
+                langName: 'தமிழ்', badge: '✨ ஹூண்டாய் மெரைன்',
+                titleMain: 'காப்பீடு', titleSub: 'பருவகால ஊழியர்',
+                desc: 'எளிதான பதிவு!',
+                btnConsult: 'ஆலோசனை', btnDetail: 'விவரம்',
+                card1Title: 'அரசு', card1Desc: 'அதிகாரிகள்', linkGo: 'செல்க',
+                card2Title: 'தனிநபர்', card2Desc: 'பதிவு', linkGo2: 'செல்க',
+                card3Title: 'சரிபார்', card3Desc: 'நிலை', linkGo3: 'சரிபார்',
+                card4Title: 'கோரிக்கை', card4Desc: 'வழங்கு', linkGo4: 'கோரிக்கை',
+                ftMenu1: 'நுகர்வோர் பாதுகாப்பு', ftMenu2: 'தனியுரிமை', ftMenu3: 'விதிமுறைகள்', ftMenu4: 'விதிகள்', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">நிறுவனம் :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">CEO :</span> Seo Yuri',
+                ftLine2: 'பதிவு எண் : 780-22-02367',
+                ftLine3: '<span class="fw-bold">தொடர்புக்கு : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">முகவரி :</span> Gangnam-gu, Seoul'
+            },
+            'ur': {
+                langName: 'اردو', badge: '✨ Hyundai Marine',
+                titleMain: 'انشورنس', titleSub: 'موسمی کارکن',
+                desc: 'آسان سائن اپ!',
+                btnConsult: 'مشورہ', btnDetail: 'تفصیلات',
+                card1Title: 'حکومت', card1Desc: 'عہدیدار', linkGo: 'جائیں',
+                card2Title: 'انفرادی', card2Desc: 'سائن اپ', linkGo2: 'جائیں',
+                card3Title: 'چیک', card3Desc: 'حیثیت', linkGo3: 'چیک',
+                card4Title: 'دعویٰ', card4Desc: 'جمع', linkGo4: 'دعویٰ',
+                ftMenu1: 'صارفین کا تحفظ', ftMenu2: 'پرائیویسی', ftMenu3: 'شرائط', ftMenu4: 'ضوابط', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">کمپنی :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">سی ای او :</span> Seo Yuri',
+                ftLine2: 'رجسٹریشن نمبر : 780-22-02367',
+                ftLine3: '<span class="fw-bold">سینٹر : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">پتہ :</span> Gangnam-gu, Seoul'
+            },
+            'fa': {
+                langName: 'فارسی', badge: '✨ Hyundai Marine',
+                titleMain: 'بیمه', titleSub: 'کارگران فصلی',
+                desc: 'ثبت نام آسان!',
+                btnConsult: 'مشاوره', btnDetail: 'جزئیات',
+                card1Title: 'دولت', card1Desc: 'مسئولین', linkGo: 'برو',
+                card2Title: 'انفرادی', card2Desc: 'ثبت نام', linkGo2: 'برو',
+                card3Title: 'بررسی', card3Desc: 'وضعیت', linkGo3: 'بررسی',
+                card4Title: 'ادعا', card4Desc: 'ثبت', linkGo4: 'ادعا',
+                ftMenu1: 'حمایت از مصرف کننده', ftMenu2: 'حریم خصوصی', ftMenu3: 'شرایط', ftMenu4: 'مقررات', ftMenu5: 'FAQ',
+                ftCompanyName: 'INSKOREA', 
+                ftLine1: '<span class="fw-bold">شرکت :</span> INSKOREA <span class="mx-2">|</span> <span class="fw-bold">مدیر عامل :</span> Seo Yuri',
+                ftLine2: 'شماره ثبت : 780-22-02367',
+                ftLine3: '<span class="fw-bold">تماس : 010 7546 5568</span>',
+                ftAddr: '<span class="fw-bold">آدرس :</span> Gangnam-gu, Seoul'
+            }
         };
 
         function changeLang(lang) {
             const data = translations[lang] || translations['en'];
+
+            // 상단
             document.getElementById('current-lang').innerText = data.langName;
             document.getElementById('badge-text').innerText = data.badge;
             document.getElementById('title-main').innerText = data.titleMain;
@@ -464,6 +661,8 @@
             document.getElementById('hero-desc').innerHTML = data.desc;
             document.getElementById('btn-consult').innerText = data.btnConsult;
             document.getElementById('btn-detail').innerText = data.btnDetail;
+            
+            // 카드 1~4
             document.getElementById('card1-title').innerText = data.card1Title;
             document.getElementById('card1-desc').innerText = data.card1Desc;
             document.getElementById('link-go').innerHTML = data.linkGo + ' <i class="bi bi-arrow-right"></i>';
@@ -476,22 +675,21 @@
             document.getElementById('card4-title').innerText = data.card4Title;
             document.getElementById('card4-desc').innerText = data.card4Desc;
             document.getElementById('link-go4').innerHTML = data.linkGo4 + ' <i class="bi bi-arrow-right"></i>';
-            document.getElementById('card5-title').innerText = data.card5Title;
-            document.getElementById('card5-desc').innerText = data.card5Desc;
-            document.getElementById('link-go5').innerHTML = data.linkGo5 + ' <i class="bi bi-arrow-right"></i>';
-            
-            const ftData = (data.ftMenu1) ? data : translations['en']; 
-            document.getElementById('ft-menu-1').innerText = ftData.ftMenu1;
-            document.getElementById('ft-menu-2').innerText = ftData.ftMenu2;
-            document.getElementById('ft-menu-3').innerText = ftData.ftMenu3;
-            document.getElementById('ft-menu-4').innerText = ftData.ftMenu4;
-            document.getElementById('ft-company-name').innerText = ftData.ftCompanyName;
-            document.getElementById('ft-line-1').innerHTML = ftData.ftLine1;
-            document.getElementById('ft-line-2').innerHTML = ftData.ftLine2;
-            document.getElementById('ft-line-3').innerHTML = ftData.ftLine3;
-            document.getElementById('ft-addr').innerHTML = ftData.ftAddr;
+
+            // 하단 정보 (전체 번역 적용)
+            document.getElementById('ft-menu-1').innerText = data.ftMenu1;
+            document.getElementById('ft-menu-2').innerText = data.ftMenu2;
+            document.getElementById('ft-menu-3').innerText = data.ftMenu3;
+            document.getElementById('ft-menu-4').innerText = data.ftMenu4;
+            document.getElementById('ft-menu-5').innerText = data.ftMenu5;
+            document.getElementById('ft-company-name').innerText = data.ftCompanyName;
+            document.getElementById('ft-line-1').innerHTML = data.ftLine1;
+            document.getElementById('ft-line-2').innerHTML = data.ftLine2;
+            document.getElementById('ft-line-3').innerHTML = data.ftLine3;
+            document.getElementById('ft-addr').innerHTML = data.ftAddr;
         }
     </script>
 </body>
 </html>
+
 
