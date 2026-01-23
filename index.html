@@ -34,10 +34,6 @@
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-            /* ▼▼▼ 이 3줄을 추가하면 위쪽 공백이 사라집니다 ▼▼▼ */
-            padding-top: 0 !important;    /* 위쪽 안쪽 여백 제거 */
-            padding-bottom: 0 !important; /* 아래쪽 안쪽 여백 제거 (선택) */
-            top: 0 !important;            /* 화면 최상단에 고정 */
         }
         
         /* 언어 목록 스크롤 */
@@ -127,6 +123,28 @@
             .card-icon-box { width: 70px; height: 70px; font-size: 30px; margin-bottom: 20px; }
             h1.fw-bold { font-size: 3.5rem !important; }
             #hero-desc { font-size: 1.25rem !important; }
+        }
+
+        /* 2. 전체 내용을 담는 틀을 화면 맨 위로 강제 고정 */
+        #scale-wrapper {
+            position: absolute !important; /* 위치를 절대값으로 고정 */
+            top: 0 !important;             /* 천장에 딱 붙임 */
+            left: 0 !important;            /* 왼쪽 벽에 딱 붙임 */
+            margin: 0 auto !important;     /* 중앙 정렬 유지 */
+            padding-top: 0 !important;     /* 내부 여백 제거 */
+        }
+
+        /* 3. 메뉴바(로고 박스)를 최상단에 고정 */
+        .navbar {
+            top: 0 !important;
+            margin-top: 0 !important;
+            border-top: none !important;
+        }
+
+        /* 4. (혹시 모를) 로고 이미지 위쪽 여백 제거 */
+        .navbar-brand img {
+            margin-top: 0 !important;
+            vertical-align: top !important; /* 이미지 아래 공백 제거 */
         }
     </style>
 </head>
@@ -426,6 +444,7 @@
     </script>
 </body>
 </html>
+
 
 
 
