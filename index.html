@@ -209,57 +209,57 @@
         </section>
 
         <!-- ★ 카드 메뉴 5개 (모바일 2열 배치) ★ -->
-        <section class="py-5" style="margin-top: -20px;">
+        <section class="py-5" style="margin-top: -30px;">
             <div class="container" style="max-width: 1400px;">
-                <div class="row g-3"> 
+                <div class="row g-3 justify-content-center"> 
                     
-                    <!-- 1. 지자체 가입 -->
+                    <!-- 1. 지방자치단체 가입 -->
                     <div class="col-6 col-lg-4">
-                        <div class="custom-card">
+                        <div class="custom-card" onclick="location.href='local.html'">
                             <div class="card-icon-box"><i class="bi bi-building"></i></div>
-                            <h5 id="card1-title">지방자치단체 가입</h5>
-                            <p id="card1-desc">단체보험 가입 / 단체이력 관리리</p>
-                            <a id="link-go" href="local.html" class="text-decoration-none fw-bold small text-primary">바로가기 <i class="bi bi-arrow-right"></i></a>
+                            <h5 id="card1-title" class="fw-bold mb-2">지방자치단체 가입</h5>
+                            <p id="card1-desc" class="text-secondary small">단체보험 가입 / 단체이력 관리</p>
+                            <a id="link-go" href="local.html" class="text-decoration-none fw-bold small" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
 
-                    <!-- 2. 개인 가입 (추가됨) -->
+                    <!-- 2. 근로자 개인 가입 -->
                     <div class="col-6 col-lg-4">
-                        <div class="custom-card">
-                            <div class="card-icon-box" style="background-color: #F3E5F5; color: #9C27B0;"><i class="bi bi-person-plus-fill"></i></div>
-                            <h5 id="card5-title">근로자개인 가입</h5>
-                            <p id="card5-desc">개별 보험료 확인 / 보험 가입</p>
-                            <a id="link-go5" href="apply.html" class="text-decoration-none fw-bold small" style="color: #9C27B0;">가입하기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="custom-card" onclick="location.href='apply.html'">
+                            <div class="card-icon-box" style="background-color: #E3F2FD; color: #2196F3;"><i class="bi bi-person-fill"></i></div>
+                            <h5 id="card2-title" class="fw-bold mb-2">근로자개인 가입</h5>
+                            <p id="card2-desc" class="text-secondary small">개별 보험료 확인 및 보험 가입</p>
+                            <a id="link-go2" href="apply.html" class="text-decoration-none fw-bold small" style="color: #2196F3;">바로가기 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
 
-                    <!-- 3. 단체형 가입 -->
+                    <!-- 3. 단체가입 동의 (수정됨) -->
                     <div class="col-6 col-lg-4">
-                        <div class="custom-card">
-                            <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-people-fill"></i></div>
-                            <h5 id="card2-title">단체가입 동의</h5>
-                            <p id="card2-desc">이용약관 / 단체규약 / 개인정보수</p>
-                            <a id="link-go2" href="apply.html" class="text-decoration-none fw-bold small" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="custom-card" onclick="location.href='check.html'">
+                            <div class="card-icon-box" style="background-color: #FFF4E6; color: #FF9F43;"><i class="bi bi-check-circle-fill"></i></div>
+                            <h5 id="card3-title" class="fw-bold mb-2">단체가입 동의</h5>
+                            <p id="card3-desc" class="text-secondary small">이용약관 / 단체규약 / 개인정보수집</p>
+                            <a id="link-go3" href="check.html" class="text-decoration-none fw-bold small" style="color: #FF9F43;">바로가기 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
 
                     <!-- 4. 가입 조회 -->
                     <div class="col-6 col-lg-4">
-                        <div class="custom-card">
+                        <div class="custom-card" onclick="location.href='check.html'">
                             <div class="card-icon-box" style="background-color: #E8F7F3; color: #2ECC71;"><i class="bi bi-search"></i></div>
-                            <h5 id="card3-title">가입 조회</h5>
-                            <p id="card3-desc">가입내역 확인 / 가입증명서 발급</p>
-                            <a id="link-go3" href="check.html" class="text-decoration-none fw-bold small" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
+                            <h5 id="card4-title" class="fw-bold mb-2">가입 조회</h5>
+                            <p id="card4-desc" class="text-secondary small">가입내역 확인 / 가입증명서 발급</p>
+                            <a id="link-go4" href="check.html" class="text-decoration-none fw-bold small" style="color: #2ECC71;">조회하기 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
 
                     <!-- 5. 청구하기 (추가됨) -->
                     <div class="col-6 col-lg-4">
-                        <div class="custom-card">
-                            <div class="card-icon-box" style="background-color: #E6F4FF; color: #0064FF;"><i class="bi bi-clipboard2-check"></i></div>
-                            <h5 id="card4-title">청구하기</h5>
-                            <p id="card4-desc">보험금 청구 / 가입여부 조회</p>
-                            <a id="link-go4" href="check.html" class="text-decoration-none fw-bold small" style="color: #0064FF;">청구하기 <i class="bi bi-arrow-right"></i></a>
+                        <div class="custom-card" onclick="location.href='check.html'">
+                            <div class="card-icon-box" style="background-color: #F3E5F5; color: #9C27B0;"><i class="bi bi-clipboard-check-fill"></i></div>
+                            <h5 id="card5-title" class="fw-bold mb-2">청구 하기</h5>
+                            <p id="card5-desc" class="text-secondary small">보험금 청구 / 가입여부 조회</p>
+                            <a id="link-go5" href="check.html" class="text-decoration-none fw-bold small" style="color: #9C27B0;">조회하기 <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
 
@@ -422,6 +422,7 @@
     </script>
 </body>
 </html>
+
 
 
 
