@@ -34,6 +34,10 @@
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+            /* ▼▼▼ 이 3줄을 추가하면 위쪽 공백이 사라집니다 ▼▼▼ */
+            padding-top: 0 !important;    /* 위쪽 안쪽 여백 제거 */
+            padding-bottom: 0 !important; /* 아래쪽 안쪽 여백 제거 (선택) */
+            top: 0 !important;            /* 화면 최상단에 고정 */
         }
         
         /* 언어 목록 스크롤 */
@@ -422,6 +426,7 @@
     </script>
 </body>
 </html>
+
 
 
 
